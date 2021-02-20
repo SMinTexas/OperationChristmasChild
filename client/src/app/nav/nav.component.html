@@ -1,29 +1,38 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="#">Operation Christmas Child</a>
+    <a class="navbar-brand" routerLink='/' routerLinkActive='active'>Operation Christmas Child</a>
     <!-- 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> 
     -->
     <!-- <div class="collapse navbar-collapse" id="navbarCollapse"> -->
-    <ul class="navbar-nav me-auto" *ngIf="accountService.currentUser$ | async">
-      <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="#">Inventory</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Add</a>
-      </li>
+    <ul class="navbar-nav me-auto">
+      <ng-container *ngIf="accountService.currentUser$ | async">
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/inventory-list' routerLinkActive='active'>Inventory List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/inventory-add' routerLinkActive='active'>Add Inventory</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/inventory-edit/:id' routerLinkActive='active'>Edit an Inventory Item</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/maintenance' routerLinkActive='active'>Maintenance</a>
+        </li>
+      </ng-container>
+
     </ul>
 
-    <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
-      <a class="dropdown-toggle text-light" dropdownToggle>Welcome User</a>
+    <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+      <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username | titlecase}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item">View Inventory List</a>
-        <a class="dropdown-item">Add Inventory</a>
-        <a class="dropdown-item">Edit Inventory Item</a>
+        <a class="dropdown-item" routerLink='/inventory-list'>View Inventory List</a>
+        <a class="dropdown-item" routerLink='/inventory-add'>Add Inventory</a>
+        <a class="dropdown-item" routerLink='/inventory-edit/:id'>Edit Inventory Item</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item">Maintenance</a>
+        <a class="dropdown-item" routerLink='/maintenance'>Maintenance</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()">Logout</a>
       </div>
@@ -36,19 +45,21 @@
       (ngSubmit)="login()" 
       autocomplete="off"
     >
-      <input 
-        name="username"
-        [(ngModel)]="model.username"
-        class="form-control mr-sm-2" 
-        type="text" 
-        placeholder="Username">
-      <input 
-        name="password"
-        [(ngModel)]="model.password"
-        class="form-control mr-sm-2" 
-        type="password" 
-        placeholder="Password">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+      <div class="form-group">
+        <input 
+          name="username"
+          [(ngModel)]="model.username"
+          class="form-control mr-sm-2" 
+          type="text" 
+          placeholder="Username">
+        <input 
+          name="password"
+          [(ngModel)]="model.password"
+          class="form-control mr-sm-2" 
+          type="password" 
+          placeholder="Password">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      </div>
     </form>
     <!-- </div> -->
   </div>
