@@ -39,7 +39,6 @@ export class AccountService {
 
   setCurrentUser(user: User)
   {
-    console.log('THIS IS THE CURRENT USER:', user.username);
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
@@ -47,6 +46,6 @@ export class AccountService {
   logout() 
   {
     localStorage.removeItem('user');
-    this.currentUserSource.next(undefined);
+    this.currentUserSource.next(null);
   }
 }
