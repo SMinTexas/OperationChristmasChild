@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
   login() 
   {
     this.accountService.login(this.model).subscribe(response => {
-      this.router.navigateByUrl('/inventory-list'); //this will be updated to go to the dashboard component
+      this.router.navigateByUrl('/dashboard'); 
     }, error => {
       console.log(error);
       this.errorMsg = error.url + ' http status code: ' + error.status;

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { BadRequestComponent } from './errors/bad-request/bad-request.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
+      {path: 'dashboard', component: DashboardComponent},
       {path: 'inventory-list', component: InventoryListComponent},
       {path: 'inventory-add', component: InventoryAddComponent},
       {path: 'inventory-edit/:id', component: InventoryEditComponent},

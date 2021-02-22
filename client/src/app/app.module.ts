@@ -20,6 +20,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { BadRequestComponent } from './errors/bad-request/bad-request.component';
 import { UnauthorizedComponent } from './errors/unauthorized/unauthorized.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     NotFoundComponent,
     BadRequestComponent,
     UnauthorizedComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
