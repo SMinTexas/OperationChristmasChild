@@ -22,7 +22,6 @@
           <a class="nav-link" routerLink='/maintenance' routerLinkActive='active'>Maintenance</a>
         </li>
       </ng-container>
-
     </ul>
 
     <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
@@ -39,7 +38,7 @@
     </div>
 
     <form 
-      *ngIf="(accountService.currentUser$ | async) == null" 
+      *ngIf="(accountService.currentUser$ | async) === null" 
       #loginForm="ngForm" 
       class="form-inline mt-2 mt-md-0" 
       (ngSubmit)="login()" 
