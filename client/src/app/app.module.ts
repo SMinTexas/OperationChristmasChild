@@ -12,7 +12,6 @@ import { RegisterComponent } from './register/register.component';
 import { InventoryListComponent } from './inventory/inventory-list/inventory-list.component';
 import { InventoryAddComponent } from './inventory/inventory-add/inventory-add.component';
 import { InventoryEditComponent } from './inventory/inventory-edit/inventory-edit.component';
-import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
@@ -21,6 +20,8 @@ import { BadRequestComponent } from './errors/bad-request/bad-request.component'
 import { UnauthorizedComponent } from './errors/unauthorized/unauthorized.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProductCategoriesComponent } from './categories/product-categories/product-categories.component';
+import { AddProductCategoryComponent } from './categories/add-product-category/add-product-category.component';
 
 @NgModule({
   declarations: [
@@ -31,13 +32,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     InventoryListComponent,
     InventoryAddComponent,
     InventoryEditComponent,
-    MaintenanceComponent,
     TestErrorsComponent,
     NotFoundComponent,
     BadRequestComponent,
     UnauthorizedComponent,
     ServerErrorComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProductCategoriesComponent,
+    AddProductCategoryComponent
   ],
   imports: [
     BrowserModule,
