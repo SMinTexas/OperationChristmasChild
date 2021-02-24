@@ -4,6 +4,7 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-categories',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-categories.component.css']
 })
 export class ProductCategoriesComponent implements OnInit {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
   addCategoryMode = false;
   categories: any;
   user: User;
