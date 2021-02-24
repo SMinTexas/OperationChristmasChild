@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Data;
+using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,29 @@ namespace API.Controllers
         public async Task<ActionResult<ProductCategory>> GetCategory(int id)
         {
             return await _context.ProductCategories.FindAsync(id);
+        }
+
+        [HttpPost("add")]
+        public async Task<ActionResult<CategoryDto>> AddCategory(CategoryDto categoryDto)
+        {
+            if (await CategoryExists(categoryDto.Category)) return BadRequest("This category has already been entered.");
+            var cat = new ProductCategory
+            {
+                Category = categoryDto.Category
+            };
+
+            _context.ProductCategories.Add(cat);
+            await _context.SaveChangesAsync();
+
+            return new CategoryDto
+            {
+                Category = cat.Category
+            };
+        } 
+
+        private async Task<bool> CategoryExists(string category)
+        {
+            return await _context.ProductCategories.AnyAsync(x => x.Category == category);
         }
     }
 }

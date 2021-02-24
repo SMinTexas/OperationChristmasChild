@@ -5,6 +5,8 @@ import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { InventoryService } from 'src/app/_services/inventory.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-categories',
@@ -15,9 +17,16 @@ export class ProductCategoriesComponent implements OnInit {
   baseUrl = environment.apiUrl;
   addCategoryMode = false;
   categories: any;
+  model: any = {};
   user: User;
+  errorMsg: string = "";
 
-  constructor(private http: HttpClient, private accountService: AccountService, private router: Router) 
+  constructor(
+    private http: HttpClient, 
+    private accountService: AccountService, 
+    private inventoryService: InventoryService,
+    private router: Router,
+    private toastr: ToastrService) 
   {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
@@ -29,10 +38,11 @@ export class ProductCategoriesComponent implements OnInit {
 
   getCategories()
   {
-    this.http.get(this.baseUrl + 'categories').subscribe(response => {
+    this.inventoryService.getCategories(this.model).subscribe(response => {
       this.categories = response;
     }, error => {
-      console.log(error);
+      this.errorMsg = error.url + ' http response code ' + error.status;
+      this.toastr.error(error.error, this.errorMsg);
     })
   }
 
