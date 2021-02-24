@@ -13,7 +13,9 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private toastr: ToastrService) {}
+  constructor(
+    private router: Router, 
+    private toastr: ToastrService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -50,7 +52,6 @@ export class ErrorInterceptor implements HttpInterceptor {
               break;
             default:
               this.toastr.error('Something unexpected went wrong.');
-              console.log(error);
               break;
           }
         }

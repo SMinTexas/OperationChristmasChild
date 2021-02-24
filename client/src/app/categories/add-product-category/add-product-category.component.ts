@@ -23,7 +23,6 @@ export class AddProductCategoryComponent implements OnInit {
   addCategory()
   {
     this.inventoryService.addCategory(this.model).subscribe(response => {
-      console.log('Success ', response);
       this.successMsg = "New Product Category - " + this.model.category + " - successfully added.";
       this.toastr.success(this.successMsg,this.toastrTitle);
       this.cancel();

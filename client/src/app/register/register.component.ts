@@ -12,7 +12,9 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   errorMsg: string = '';
 
-  constructor(private accountService: AccountService, private toastr: ToastrService) { }
+  constructor(
+    private accountService: AccountService, 
+    private toastr: ToastrService) { }
 
   ngOnInit(): void { }
 
