@@ -1,1 +1,28 @@
-<p>add-product-category works!</p>
+<form #addCategoryForm="ngForm" (ngSubmit)="addCategory()" autocomplete="off">
+    <h2 class="text-center text-primary">Add a New Product Category</h2>
+    <hr>
+    <div class="form-group">
+        <input 
+            type="text" 
+            class="form-control" 
+            name="category" 
+            [(ngModel)]="model.category" 
+            placeholder="category"
+        >
+    </div>
+
+    <div class="form-group text-center">
+        <button 
+            class="btn btn-success mr-2" 
+            type="submit"
+        >Add
+        </button>
+        <button 
+            class="btn btn-primary mr-2" 
+            type="button" 
+            (click)="cancel()"
+        >Cancel
+        </button>
+    </div>
+</form>
+

@@ -15,6 +15,7 @@ import { InventoryEditComponent } from './inventory/inventory-edit/inventory-edi
 import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { BadRequestComponent } from './errors/bad-request/bad-request.component';
 import { UnauthorizedComponent } from './errors/unauthorized/unauthorized.component';
@@ -50,7 +51,8 @@ import { AddProductCategoryComponent } from './categories/add-product-category/a
     SharedModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
+import { take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-categories',
@@ -6,10 +11,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-categories.component.css']
 })
 export class ProductCategoriesComponent implements OnInit {
+  baseUrl = 'https://localhost:5001/api/';
+  addCategoryMode = false;
+  categories: any;
+  user: User;
 
-  constructor() { }
+  constructor(private http: HttpClient, private accountService: AccountService, private router: Router) 
+  {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  { 
+    this.getCategories();
+  }
+
+  getCategories()
+  {
+    this.http.get(this.baseUrl + 'categories').subscribe(response => {
+      this.categories = response;
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  cancel()
+  {
+    this.router.navigateByUrl('/dashboard');
+  }
+
+  addCategoryToggle()
+  {
+    this.addCategoryMode = !this.addCategoryMode;
+  }
+
+  cancelAddCategoryMode(event: boolean)
+  {
+    this.addCategoryMode = event;
   }
 
 }

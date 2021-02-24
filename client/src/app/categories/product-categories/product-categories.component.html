@@ -1,1 +1,26 @@
-<p>product-categories works!</p>
+<div class="container mt-5">
+    <div *ngIf="!addCategoryMode" style='text-align: center;'>
+        <div class="text-center">
+            <button class="btn btn-primary btn-lg mr-2" (click)="addCategoryToggle()" >Add Category</button>
+            <button class="btn btn-info btn-lg" (click)="cancel()">Cancel</button>
+        </div>
+        <br>
+        <hr>
+        <h4 class="lead">Product Categories</h4>
+        <ul style="list-style-type: none; text-align: left;">
+            <li *ngFor="let category of categories">{{category.id}} - {{category.category}}</li>
+        </ul>
+    </div>
+
+    <div *ngIf="addCategoryMode" class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <app-add-product-category 
+                    (cancelAddCategory)="cancelAddCategoryMode($event)"
+                >
+                </app-add-product-category>
+            </div>
+        </div>
+    </div>
+</div>
+

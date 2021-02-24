@@ -25,7 +25,7 @@ const routes: Routes = [
       {path: 'inventory/list', component: InventoryListComponent},
       {path: 'inventory/add', component: InventoryAddComponent},
       {path: 'inventory/edit/:id', component: InventoryEditComponent},
-      {path: 'product-categories', component: ProductCategoriesComponent},
+      {path: 'categories', component: ProductCategoriesComponent},
       {path: 'product-category/add', component: AddProductCategoryComponent},
     ]
   },

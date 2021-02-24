@@ -14,7 +14,6 @@ export class NavComponent implements OnInit {
   model: any = {};
   errorMsg: string = '';
 
-
   constructor(
     public accountService: AccountService, 
     private router: Router, 
