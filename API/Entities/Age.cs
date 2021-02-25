@@ -2,7 +2,7 @@ namespace API.Entities
 {
     public class Age
     {
-        public int Id { get; set; }
-        public string AgeRange { get; set; }
+        public int AgeId { get; set; }
+        public string AgeGroup { get; set; }
     }
 }

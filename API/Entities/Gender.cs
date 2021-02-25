@@ -2,7 +2,7 @@ namespace API.Entities
 {
     public class Gender
     {
-        public int Id { get; set; }
+        public int GenderId { get; set; }
         public string GenderType { get; set; }
     }
 }
