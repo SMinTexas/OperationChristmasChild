@@ -6,10 +6,12 @@
         </div>
         <br>
         <hr>
-        <h4 class="lead">Product Categories</h4>
-        <ul style="list-style-type: none; text-align: left;">
-            <li *ngFor="let category of categories">{{category.productCategoryId}} - {{category.category}}</li>
-        </ul>
+        <div class="container mt-3">
+            <h4 class="lead">Product Categories</h4>
+            <ul style="list-style-type: none; text-align: left;">
+                <li *ngFor="let category of categories">{{category.productCategoryId}} - {{category.category}}</li>
+            </ul>
+        </div>
     </div>
 
     <div *ngIf="addCategoryMode" class="container">

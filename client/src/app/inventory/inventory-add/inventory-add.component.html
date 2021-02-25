@@ -1,1 +1,25 @@
-<p>inventory-add works!</p>
+<form #addCategoryForm="ngForm" (ngSubmit)="addInventoryItem()" autocomplete="off">
+    <h2 class="text-center text-primary">Add a New Inventory Item</h2>
+    <hr>
+    <div class="form-group">
+        <label for="category">Product Category</label>
+        <select name="category" class="form-control">
+            <option disabled>Choose Product Category</option>
+            <option *ngFor="let category of categories">{{category.category}}</option>
+        </select>
+    </div>
+
+    <div class="form-group text-center">
+        <button 
+            class="btn btn-success mr-2" 
+            type="submit"
+        >Add
+        </button>
+        <button 
+            class="btn btn-primary mr-2" 
+            type="button" 
+            (click)="cancel()"
+        >Cancel
+        </button>
+    </div>
+</form>

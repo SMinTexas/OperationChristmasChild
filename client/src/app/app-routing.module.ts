@@ -22,7 +22,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: 'dashboard', component: DashboardComponent},
-      {path: 'inventory/list', component: InventoryListComponent},
+      {path: 'inventory', component: InventoryListComponent},
       {path: 'inventory/add', component: InventoryAddComponent},
       {path: 'inventory/edit/:id', component: InventoryEditComponent},
       {path: 'categories', component: ProductCategoriesComponent},
