@@ -10,8 +10,8 @@ import { ToastrModule } from 'ngx-toastr';
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
       positionClass:'toast-bottom-full-width',
-      timeOut: 1000,
-      extendedTimeOut: 10000,
+      timeOut: 5000,
+      extendedTimeOut: 1000,
       preventDuplicates: true,
       progressAnimation: 'decreasing',
       tapToDismiss: true
