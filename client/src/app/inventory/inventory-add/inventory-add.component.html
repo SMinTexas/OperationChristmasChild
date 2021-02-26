@@ -8,6 +8,20 @@
             <option *ngFor="let category of categories">{{category.category}}</option>
         </select>
     </div>
+    <div class="form-group">
+        <label for="age">Age</label>
+        <select name="age" class="form-control">
+            <option disabled>Choose Age Range</option>
+            <option *ngFor="let age of ages">{{age.ageGroup}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="gender">Gender</label>
+        <select name="gender" class="form-control">
+            <option disabled>Choose Gender</option>
+            <option *ngFor="let gender of genders">{{gender.genderType}}</option>
+        </select>
+    </div>
 
     <div class="form-group text-center">
         <button 

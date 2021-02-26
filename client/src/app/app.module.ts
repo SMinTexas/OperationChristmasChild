@@ -23,6 +23,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductCategoriesComponent } from './categories/product-categories/product-categories.component';
 import { AddProductCategoryComponent } from './categories/add-product-category/add-product-category.component';
+import { AgeRangeComponent } from './ages/age-range/age-range.component';
+import { GenderComponent } from './genders/gender/gender.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { AddProductCategoryComponent } from './categories/add-product-category/a
     ServerErrorComponent,
     DashboardComponent,
     ProductCategoriesComponent,
-    AddProductCategoryComponent
+    AddProductCategoryComponent,
+    AgeRangeComponent,
+    GenderComponent
   ],
   imports: [
     BrowserModule,

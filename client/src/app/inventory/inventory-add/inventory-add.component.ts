@@ -11,6 +11,8 @@ export class InventoryAddComponent implements OnInit {
   @Output() cancelAddInventory = new EventEmitter();
   model: any;
   categories: any;
+  ages: any;
+  genders: any;
   toastrTitle: string = "Add a New Inventory Item";
   successMsg: string = "";
   errorMsg: string = "";
@@ -22,13 +24,37 @@ export class InventoryAddComponent implements OnInit {
 
   ngOnInit(): void 
   { 
-    this.getCategories()
+    this.getCategories();
+    this.getAges();
+    this.getGenders();
   }
 
   getCategories()
   {
     this.inventoryService.getCategories(this.model).subscribe(response => {
       this.categories = response;
+    }, error => {
+      this.errorMsg = error.url + ' http response code ' + error.status;
+      this.toastr.error(error.error, this.errorMsg);
+    })
+  }
+
+  getAges()
+  {
+    this.inventoryService.getAges(this.model).subscribe(response => {
+      this.ages = response;
+      console.log('inventory-add component this.age = ',this.ages);
+    }, error => {
+      this.errorMsg = error.url + ' http response code ' + error.status;
+      this.toastr.error(error.error, this.errorMsg);
+    })
+  }
+
+  getGenders()
+  {
+    this.inventoryService.getGenders(this.model).subscribe(response => {
+      this.genders = response;
+      console.log('inventory-add component this.genders = ', this.genders);
     }, error => {
       this.errorMsg = error.url + ' http response code ' + error.status;
       this.toastr.error(error.error, this.errorMsg);

@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 export class InventoryListComponent implements OnInit {
   baseUrl = environment.apiUrl;
   categories: any;
+  ages: any;
+  genders: any;
   model: any;
   user: User;
   errorMsg: string = "";
@@ -33,18 +35,30 @@ export class InventoryListComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    this.getCategories();
+    // this.getCategories();
+    // this.getAges();
   }
 
-  getCategories()
-  {
-    this.inventoryService.getCategories(this.model).subscribe(response => {
-      this.categories = response;
-    }, error => {
-      this.errorMsg = error.url + ' http response code ' + error.status;
-      this.toastr.error(error.error, this.errorMsg);
-    })
-  }
+  // getCategories()
+  // {
+  //   this.inventoryService.getCategories(this.model).subscribe(response => {
+  //     this.categories = response;
+  //   }, error => {
+  //     this.errorMsg = error.url + ' http response code ' + error.status;
+  //     this.toastr.error(error.error, this.errorMsg);
+  //   })
+  // }
+
+  // getAges()
+  // {
+  //   this.inventoryService.getAges(this.model).subscribe(response => {
+  //     this.ages = response;
+  //     console.log('inventory-list component this.ages = ', this.ages);
+  //   }, error => {
+  //     this.errorMsg = error.url + ' https response code ' + error.status;
+  //     this.toastr.error(error.error, this.errorMsg);
+  //   })
+  // }
 
   cancel()
   {
@@ -54,7 +68,6 @@ export class InventoryListComponent implements OnInit {
   addInventoryToggle()
   {
     this.addInventoryMode = !this.addInventoryMode;
-    console.log('Have just updated this.addInventoryMode to ',this.addInventoryMode);
   }
 
   cancelAddInventoryMode(event: boolean)
