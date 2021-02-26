@@ -31,7 +31,6 @@ export class AddProductCategoryComponent implements OnInit {
       this.errorMsg = error.url + " http response code " + error.status;
       this.toastr.error(error.error, this.errorMsg);
     })
-
   }
 
   cancel()

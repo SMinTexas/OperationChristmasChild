@@ -3,17 +3,27 @@
     <hr>
     <div class="form-group">
         <input 
+            id="category"
             type="text" 
             class="form-control" 
             name="category" 
             [(ngModel)]="model.category" 
-            placeholder="category"
+            placeholder="Category"
+            required
+            #category="ngModel"
         >
+    </div>
+
+    <div *ngIf="category.invalid && (category.dirty || category.touched)">
+        <div *ngIf="category.errors.required"  class="alert alert-danger">
+            The new category is required.
+        </div>
     </div>
 
     <div class="form-group text-center">
         <button 
             class="btn btn-success mr-2" 
+            [disabled]="!model.category"
             type="submit"
         >Add
         </button>
