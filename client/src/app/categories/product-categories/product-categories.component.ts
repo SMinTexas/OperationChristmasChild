@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { InventoryService } from 'src/app/_services/inventory.service';
 import { ToastrService } from 'ngx-toastr';
+import { Category } from 'src/app/_models/category';
 
 @Component({
   selector: 'app-product-categories',
@@ -21,6 +22,9 @@ export class ProductCategoriesComponent implements OnInit {
   user: User;
   errorMsg: string = "";
 
+  productCategories: Category[];
+
+
   constructor(
     private http: HttpClient, 
     private accountService: AccountService, 
@@ -33,18 +37,19 @@ export class ProductCategoriesComponent implements OnInit {
 
   ngOnInit(): void 
   { 
-    this.getCategories();
+    // this.getCategories();
+    this.getProductCategories();
   }
 
-  getCategories()
-  {
-    this.inventoryService.getCategories(this.model).subscribe(response => {
-      this.categories = response;
-    }, error => {
-      this.errorMsg = error.url + ' http response code ' + error.status;
-      this.toastr.error(error.error, this.errorMsg);
-    })
-  }
+  // getCategories()
+  // {
+  //   this.inventoryService.getCategories(this.model).subscribe(response => {
+  //     this.categories = response;
+  //   }, error => {
+  //     this.errorMsg = error.url + ' http response code ' + error.status;
+  //     this.toastr.error(error.error, this.errorMsg);
+  //   })
+  // }
 
   cancel()
   {
@@ -61,4 +66,8 @@ export class ProductCategoriesComponent implements OnInit {
     this.addCategoryMode = event;
   }
 
+  getProductCategories()
+  {
+    this.inventoryService.getProductCategories().then(data => this.productCategories = data);
+  }
 }

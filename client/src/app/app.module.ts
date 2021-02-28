@@ -25,6 +25,8 @@ import { ProductCategoriesComponent } from './categories/product-categories/prod
 import { AddProductCategoryComponent } from './categories/add-product-category/add-product-category.component';
 import { AgeRangeComponent } from './ages/age-range/age-range.component';
 import { GenderComponent } from './genders/gender/gender.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { GenderComponent } from './genders/gender/gender.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    AgGridModule.withComponents([]),
+    TableModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

@@ -1,39 +1,252 @@
-<form #addCategoryForm="ngForm" (ngSubmit)="addInventoryItem()" autocomplete="off">
-    <h2 class="text-center text-primary">Add a New Inventory Item</h2>
-    <hr>
-    <div class="form-group">
-        <label for="category">Product Category</label>
-        <select name="category" class="form-control">
-            <option disabled>Choose Product Category</option>
-            <option *ngFor="let category of categories">{{category.category}}</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="age">Age</label>
-        <select name="age" class="form-control">
-            <option disabled>Choose Age Range</option>
-            <option *ngFor="let age of ages">{{age.ageGroup}}</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="gender">Gender</label>
-        <select name="gender" class="form-control">
-            <option disabled>Choose Gender</option>
-            <option *ngFor="let gender of genders">{{gender.genderType}}</option>
-        </select>
-    </div>
+<div class="container-fluid">
+    <form #addCategoryForm="ngForm" (ngSubmit)="addInventoryItem()" autocomplete="off">
+        <h2 class="text-center text-primary">Add a New Inventory Item</h2>
+        <hr>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="category">Product Category</label>
+                    <select name="category" class="form-control">
+                        <option disabled>Choose Product Category</option>
+                        <option *ngFor="let category of categories">{{category.category}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <select name="age" class="form-control">
+                        <option disabled>Choose Age Range</option>
+                        <option *ngFor="let age of ages">{{age.ageGroup}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select name="gender" class="form-control">
+                        <option disabled>Choose Gender</option>
+                        <option *ngFor="let gender of genders">{{gender.genderType}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="item">Item Name</label>
+                    <input 
+                        id="item"
+                        type="text" 
+                        class="form-control" 
+                        name="item" 
+                        placeholder="Item Name"
+                        required
+                    >
+                    <!-- <input 
+                        id="item"
+                        type="text" 
+                        class="form-control" 
+                        name="item" 
+                        [(ngModel)]="model.itemName" 
+                        placeholder="Item Name"
+                        required
+                        #item="ngModel"
+                    > -->
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="desc">Item Description</label>
+                    <input 
+                        id="desc"
+                        type="text" 
+                        class="form-control" 
+                        name="desc" 
+                        placeholder="Item Description"
+                        required
+                    >                    
+                    <!-- <input 
+                        id="desc"
+                        type="text" 
+                        class="form-control" 
+                        name="desc" 
+                        [(ngModel)]="model.itemDescription" 
+                        placeholder="Item Description"
+                        required
+                        #desc="ngModel"
+                    > -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="price">Item Price</label>
+                        <input 
+                            id="price"
+                            type="number"
+                            step="any"
+                            min="0.00"
+                            class="form-control" 
+                            name="price" 
+                            required
+                        >                        
+                        <!-- <input 
+                            id="price"
+                            type="text" 
+                            class="form-control" 
+                            name="price" 
+                            [(ngModel)]="model.itemPrice" 
+                            placeholder="Item Price"
+                            required
+                            #price="ngModel"
+                        > -->
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="cnt">Item Count</label>
+                        <input 
+                            id="cnt"
+                            type="number" 
+                            min="0"
+                            step="1"
+                            class="form-control" 
+                            name="cnt" 
+                            required
+                        >
+                        <!-- <input 
+                            id="cnt"
+                            type="text" 
+                            class="form-control" 
+                            name="cnt" 
+                            [(ngModel)]="model.itemCount" 
+                            placeholder="Item Count"
+                            required
+                            #cnt="ngModel"
+                        >                         -->
+                    </div>
+                </div>  
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="best">Best Price Paid</label>
+                        <input 
+                            id="best"
+                            type="number" 
+                            min="0.00"
+                            step="any"
+                            class="form-control" 
+                            name="best" 
+                        >
+                        <!-- <input 
+                            id="best"
+                            type="text" 
+                            class="form-control" 
+                            name="best" 
+                            [(ngModel)]="model.bestPrice" 
+                            placeholder="Best Price Paid"
+                            required
+                            #best="ngModel"
+                        >                         -->
+                    </div>
+                </div>    
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label for="last">Last Purchase Date</label>
+                        <input 
+                            id="last"
+                            type="datetime-local" 
+                            class="form-control" 
+                            name="last" 
+                            placeholder="Last Purchase Date"
+                            required
+                        >
+                        <!-- <input 
+                            id="last"
+                            type="text" 
+                            class="form-control" 
+                            name="last" 
+                            [(ngModel)]="model.lastPurchased" 
+                            placeholder="Last Purchase Date"
+                            required
+                            #last="ngModel"
+                        >                         -->
+                    </div>
+                </div>                                
+            </div> 
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="notes">Item Notes</label>
+                        <br>
+                        <textarea
+                            id="notes"
+                            name="notes"
+                            wrap="soft"
+                            cols="100"
+                        >
+                        </textarea>
+                        <!-- <textarea
+                            id="notes"
+                            name="notes"
+                            wrap="soft"
+                            [(ngModel)]="model.notes"
+                            #notes="ngModel"
+                        >
+                        </textarea>                         -->
+                    </div>
+                </div>
+            </div>                   
+        </div>
+    
 
-    <div class="form-group text-center">
-        <button 
-            class="btn btn-success mr-2" 
-            type="submit"
-        >Add
-        </button>
-        <button 
-            class="btn btn-primary mr-2" 
-            type="button" 
-            (click)="cancel()"
-        >Cancel
-        </button>
-    </div>
-</form>
+    
+    
+    
+    
+    
+    
+        <!-- <div class="form-group">
+            <label for="category">Product Category</label>
+            <select name="category" class="form-control">
+                <option disabled>Choose Product Category</option>
+                <option id={{category.productCategoryId}} *ngFor="let category of categories">{{category.category}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <select name="age" class="form-control" [(ngModel)]="ageId">
+                <option disabled>Choose Age Range</option>
+                <option id={{age.ageId}} *ngFor="let age of ages">{{age.ageGroup}}</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select name="gender" class="form-control" [(ngModel)]="genderId">
+                <option disabled>Choose Gender</option>
+                <option *ngFor="let gender of genders; let i = index" [value]="genders[i].genderId">{{genders[i].genderType}}</option>
+            </select>
+        </div> -->
+    
+    
+    
+    
+    
+    
+    
+        <div class="form-group text-center">
+            <button 
+                class="btn btn-success mr-2" 
+                type="submit"
+            >Add
+            </button>
+            <button 
+                class="btn btn-primary mr-2" 
+                type="button" 
+                (click)="cancel()"
+            >Cancel
+            </button>
+        </div>
+    </form>
+</div>
