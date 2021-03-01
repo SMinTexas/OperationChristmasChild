@@ -25,6 +25,8 @@ export class InventoryListComponent implements OnInit {
   addInventoryMode = false;
 
   productInventories: Inventory[];
+  recPCId: number = 0;
+  recUsId: number = 0;
 
   constructor(
     private http: HttpClient,
@@ -80,11 +82,15 @@ export class InventoryListComponent implements OnInit {
   }
 
   //this code is for primeng
-  getProductInventories()
+  getProductInventories1()
   {
     this.inventoryService.getProductInventories().then(data => this.productInventories = data);
   }
 
+  getProductInventories()
+  {
+    this.inventoryService.getProductInventories().then(data => this.productInventories = data);
+  }
 
 
   //the below code is for ag-grid - not real happy with its implementation
