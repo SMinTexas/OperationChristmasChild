@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210215194934_CreateUsers")]
-    partial class CreateUsers
+    [Migration("20210301185128_CreateAppUser")]
+    partial class CreateAppUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,23 +20,33 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AppUserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("EMail")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
                         .HasColumnType("BLOB");
 
                     b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
                         .HasColumnType("BLOB");
 
-                    b.Property<string>("UserName")
+                    b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AppUserId");
 
                     b.ToTable("Users");
                 });

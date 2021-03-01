@@ -11,6 +11,8 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   model: any = {};
   errorMsg: string = '';
+  successMsg: string = '';
+  toastrTitle: string = 'Register a New User';
 
   constructor(
     private accountService: AccountService, 
@@ -21,6 +23,8 @@ export class RegisterComponent implements OnInit {
   register()
   {
     this.accountService.register(this.model).subscribe(response => {
+      this.successMsg = "New user - " + this.model.username + " - successfully registered.";
+      this.toastr.success(this.successMsg,this.toastrTitle);
       this.cancel();
     }, error => {
       this.errorMsg = error.url + ' http status code: ' + error.status;

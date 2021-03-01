@@ -16,10 +16,10 @@ namespace API.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Inventory>>> GetInventories()
-        {
-            return await _context.Inventories.ToListAsync();
-        }        
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<Inventory>>> GetInventories()
+        // {
+        //     return await _context.Inventories.ToListAsync();
+        // }        
     }
 }
