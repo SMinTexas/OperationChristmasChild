@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace API.DTOs
+namespace API.Entities
 {
-    public class CategoryDto
+    public class ProductCategory
     {
         public int ProductCategoryId { get; set; }
         [Required]

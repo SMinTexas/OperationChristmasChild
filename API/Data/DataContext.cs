@@ -8,7 +8,7 @@ namespace API.Data
         public DataContext(DbContextOptions options) : base(options) {}
 
         public DbSet<AppUser> Users {get; set;}
-        //public DbSet<ProductCategory> ProductCategories {get; set;}
+        public DbSet<ProductCategory> ProductCategories {get; set;}
         // public DbSet<Inventory> Inventories {get; set;}
     }
 }
