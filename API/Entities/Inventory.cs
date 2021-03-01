@@ -1,11 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using API.Entities;
 
-namespace API.DTOs
+namespace API.Entities
 {
-    public class InventoryDto
+    public class Inventory
     {
         public int InventoryId { get; set; }
         [Required]
@@ -13,17 +12,19 @@ namespace API.DTOs
         [Required]
         public string ItemDescription { get; set; }
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal ItemPrice { get; set; }
         [Required]
         public int ItemCount { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal BestPrice { get; set; }
         public DateTime LastPurchasedDate { get; set; }
         public string Notes { get; set; }
-        [ForeignKey("AppUserId")]
         public int AppUserId { get; set; }
+        [ForeignKey("AppUserId")]
         public virtual AppUser AppUser { get; set; }
-        [ForeignKey("ProductCategoryId")]
         public int ProductCategoryId { get; set; }
+        [ForeignKey("ProductCategoryId")]
         public virtual ProductCategory ProductCategory { get; set; }
     }
 }

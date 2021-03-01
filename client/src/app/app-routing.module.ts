@@ -40,7 +40,7 @@ const routes: Routes = [
     children: [
       {path: 'dashboard', component: DashboardComponent},
       {path: 'inventories', component: InventoryListComponent},
-      {path: 'inventory/add', component: InventoryAddComponent},
+      {path: 'inventories/add', component: InventoryAddComponent},
       {path: 'inventory/edit/:id', component: InventoryEditComponent},
       {path: 'categories', component: ProductCategoriesComponent},
       {path: 'categories/add', component: AddProductCategoryComponent},

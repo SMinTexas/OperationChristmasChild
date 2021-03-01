@@ -9,6 +9,6 @@ namespace API.Data
 
         public DbSet<AppUser> Users {get; set;}
         public DbSet<ProductCategory> ProductCategories {get; set;}
-        // public DbSet<Inventory> Inventories {get; set;}
+        public DbSet<Inventory> Inventories {get; set;}
     }
 }
