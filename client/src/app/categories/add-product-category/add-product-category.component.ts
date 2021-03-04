@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { CategoryService } from 'src/app/_services/category.service';
 import { InventoryService } from 'src/app/_services/inventory.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class AddProductCategoryComponent implements OnInit {
   errorMsg: string = "";
 
   constructor(
+      private categoryService: CategoryService,
       private inventoryService: InventoryService,  
       private toastr: ToastrService) { }
 
@@ -22,7 +24,7 @@ export class AddProductCategoryComponent implements OnInit {
 
   addCategory()
   {
-    this.inventoryService.addCategory(this.model).subscribe(response => {
+    this.categoryService.addCategory(this.model).subscribe(response => {
       this.successMsg = "New Product Category - " + this.model.category + " - successfully added.";
       this.toastr.success(this.successMsg,this.toastrTitle);
       this.cancel();

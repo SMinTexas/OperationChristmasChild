@@ -24,19 +24,19 @@ export class InventoryAddComponent implements OnInit {
 
   ngOnInit(): void 
   { 
-    this.getCategories();
+    // this.getCategories();
   }
 
-  getCategories()
-  {
-    this.inventoryService.getCategories(this.model).subscribe(response => {
-      this.categories = response;
+  // getCategories()
+  // {
+  //   this.inventoryService.getCategories(this.model).subscribe(response => {
+  //     this.categories = response;
 
-    }, error => {
-      this.errorMsg = error.url + ' http response code ' + error.status;
-      this.toastr.error(error.error, this.errorMsg);
-    })
-  }
+  //   }, error => {
+  //     this.errorMsg = error.url + ' http response code ' + error.status;
+  //     this.toastr.error(error.error, this.errorMsg);
+  //   })
+  // }
 
   addInventoryItem()
   {

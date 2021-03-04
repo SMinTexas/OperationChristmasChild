@@ -10,23 +10,20 @@
             <h4 class="lead">Product Categories</h4>
             <p-table
                 [value]="productCategories" styleClass="p-datatable-sm p-datatable-striped"
-                [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [rowsPerPageOptions]="[5,10,20,50,100]">
-                <!-- <ng-template pTemplate="header">
+                <ng-template pTemplate="header">
                     <tr>
                         <th>Category</th>
                     </tr>
-                </ng-template> -->
+                </ng-template>
                 <ng-template pTemplate="body" let-productCategory>
                     <tr>
                         <td>{{productCategory.category}}</td>
                     </tr>
                 </ng-template>
             </p-table>
-            <!-- <ul style="list-style-type: none; text-align: left;">
-                <li *ngFor="let category of categories">{{category.productCategoryId}} - {{category.category}}</li>
-            </ul> -->
         </div>
     </div>
 
@@ -41,4 +38,95 @@
         </div>
     </div>
 </div>
+
+<!-- this was causing HTTP 415 but I like the more contained design so figure out how to make it work-->
+<!-- <div class="row">
+    <div class="container col-8 mt-3">
+            <h4 class="text-center">Product Categories</h4>
+            <p-table
+                [value]="productCategories" styleClass="p-datatable-sm p-datatable-striped"
+                [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[5,10,20,50,100]">
+                <ng-template pTemplate="body" let-productCategory>
+                    <tr>
+                        <td>{{productCategory.category}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+    </div>
+    <div class="container col-4 mt-3">
+        <form #addCategoryForm="ngForm" id="addCategoryForm" (ngSubmit)="addCategory()">
+            <h4 class="text-center">Add a New Product Category</h4>
+            <div class="form-group mt-5">
+                <input 
+                type="text" 
+                class="form-control" 
+                name="category" 
+                [(ngModel)]="model.category" 
+                required
+                #category="ngModel"
+                >
+            </div>
+        
+            <div *ngIf="category.invalid && (category.dirty || category.touched)">
+                <div *ngIf="category.errors.required"  class="alert alert-danger">
+                    The new category is required.
+                </div>
+            </div>
+        
+            <div class="form-group text-center">
+                <button 
+                    class="btn btn-success btn-block" 
+                    [disabled]="!addCategoryForm.dirty"
+                    form="addCategoryForm"
+                    type="submit"
+                >Add Category
+                </button>
+                <button 
+                    class="btn btn-primary btn-block mt-3" 
+                    type="button" 
+                    (click)="cancel()"
+                >Close
+                </button>
+            </div>      
+                  
+            <div class="alert alert-info" *ngIf="addCategoryForm.dirty">
+                <strong>{{warningMsg1}}</strong>{{warningMsg2}}
+            </div>
+        </form>
+    </div>  
+
+    <div class="container col-4 mt-1">
+        <div class="form-group text-center">
+            <button 
+                class="btn btn-success btn-block" 
+                [disabled]="!addCategoryForm.dirty"
+                form="addCategoryForm"
+                type="submit"
+            >Add Category
+            </button>
+            <button 
+                class="btn btn-primary btn-block mt-3" 
+                type="button" 
+                (click)="cancel()"
+            >Close
+            </button>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -29,6 +29,7 @@ namespace API.Controllers
         }
 
         [HttpPost("add")]
+        // [HttpPost]
         public async Task<ActionResult<CategoryDto>> AddCategory(CategoryDto categoryDto)
         {
             if (await CategoryExists(categoryDto.Category)) return BadRequest("This category has already been entered.");

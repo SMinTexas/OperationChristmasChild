@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { Inventory } from 'src/app/_models/inventory';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { CategoryService } from 'src/app/_services/category.service';
 import { InventoryService } from 'src/app/_services/inventory.service';
 import { environment } from 'src/environments/environment';
 
@@ -17,8 +18,8 @@ import { environment } from 'src/environments/environment';
 export class InventoryListComponent implements OnInit {
   baseUrl = environment.apiUrl;
   categories: any;
-  ages: any;
-  genders: any;
+  // ages: any;
+  // genders: any;
   model: any;
   user: User;
   errorMsg: string = "";
@@ -32,6 +33,7 @@ export class InventoryListComponent implements OnInit {
     private http: HttpClient,
     private accountService: AccountService,
     private inventoryService: InventoryService,
+    private categoryService: CategoryService,
     private router: Router,
     private toastr: ToastrService) 
   { 
@@ -51,17 +53,6 @@ export class InventoryListComponent implements OnInit {
   //     this.categories = response;
   //   }, error => {
   //     this.errorMsg = error.url + ' http response code ' + error.status;
-  //     this.toastr.error(error.error, this.errorMsg);
-  //   })
-  // }
-
-  // getAges()
-  // {
-  //   this.inventoryService.getAges(this.model).subscribe(response => {
-  //     this.ages = response;
-  //     console.log('inventory-list component this.ages = ', this.ages);
-  //   }, error => {
-  //     this.errorMsg = error.url + ' https response code ' + error.status;
   //     this.toastr.error(error.error, this.errorMsg);
   //   })
   // }

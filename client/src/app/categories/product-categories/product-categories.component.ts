@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/_models/user';
-import { AccountService } from 'src/app/_services/account.service';
-import { take } from 'rxjs/operators';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { InventoryService } from 'src/app/_services/inventory.service';
-import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
+import { take } from 'rxjs/operators';
+
+import { User } from 'src/app/_models/user';
 import { Category } from 'src/app/_models/category';
+import { AccountService } from 'src/app/_services/account.service';
+import { CategoryService } from 'src/app/_services/category.service';
+import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-categories',
@@ -15,20 +17,30 @@ import { Category } from 'src/app/_models/category';
   styleUrls: ['./product-categories.component.css']
 })
 export class ProductCategoriesComponent implements OnInit {
+  @ViewChild('addCategoryForm') addCategoryForm: NgForm;
   baseUrl = environment.apiUrl;
   addCategoryMode = false;
   categories: any;
   model: any = {};
   user: User;
+  successMsg: string = "";
   errorMsg: string = "";
+  toastrTitle: string = "Add a New Product Category";
+  warningMsg1: string = "Information:  ";
+  warningMsg2: string = "You have made changes.  Any unsaved changes will be lost if you navigate away from this page.";
 
   productCategories: Category[];
 
+  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
+    if (this.addCategoryForm.dirty) {
+      $event.returnValue = true;
+    }
+  }
 
   constructor(
     private http: HttpClient, 
     private accountService: AccountService, 
-    private inventoryService: InventoryService,
+    private categoryService: CategoryService,
     private router: Router,
     private toastr: ToastrService) 
   {
@@ -37,19 +49,13 @@ export class ProductCategoriesComponent implements OnInit {
 
   ngOnInit(): void 
   { 
-    // this.getCategories();
     this.getProductCategories();
   }
 
-  // getCategories()
-  // {
-  //   this.inventoryService.getCategories(this.model).subscribe(response => {
-  //     this.categories = response;
-  //   }, error => {
-  //     this.errorMsg = error.url + ' http response code ' + error.status;
-  //     this.toastr.error(error.error, this.errorMsg);
-  //   })
-  // }
+  getProductCategories()
+  {
+    this.categoryService.getProductCategories().then(data => this.productCategories = data);
+  }
 
   cancel()
   {
@@ -66,8 +72,12 @@ export class ProductCategoriesComponent implements OnInit {
     this.addCategoryMode = event;
   }
 
-  getProductCategories()
+  addCategory()
   {
-    this.inventoryService.getProductCategories().then(data => this.productCategories = data);
+    this.categoryService.addCategory(this.categories).subscribe(() => {
+      this.successMsg = "New Product Category - " + this.model.category + " - successfully added.";
+      this.toastr.success(this.successMsg, this.toastrTitle);
+      this.addCategoryForm.reset(this.categories);
+    })
   }
 }
