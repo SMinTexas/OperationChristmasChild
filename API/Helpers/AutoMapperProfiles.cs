@@ -10,6 +10,7 @@ namespace API.Helpers
         {
             CreateMap<AppUser, UserInventoryDto>();
             CreateMap<Inventory, InventoryDto>();
+            CreateMap<ProductCategory, CategoryDto>();
         }
     }
 }

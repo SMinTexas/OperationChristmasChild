@@ -1,56 +1,41 @@
+using API.DTOs;
+using API.Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Data;
-using API.DTOs;
-using API.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
     public class CategoriesController : BaseApiController
     {
-        private readonly DataContext _context;
-        public CategoriesController(DataContext context)
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IMapper _mapper;
+        public CategoriesController(ICategoryRepository categoryRepository, IMapper mapper)
         {
-            _context = context;
+            _mapper = mapper;
+            _categoryRepository = categoryRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductCategory>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories()
         {
-            return await _context.ProductCategories.ToListAsync();
+            var categories = await _categoryRepository.GetCategoriesAsync();
+            var categoriesToReturn = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+            return Ok(categoriesToReturn);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductCategory>> GetCategory(int id)
+        public async Task<ActionResult<CategoryDto>> GetCategoryAsync(int id)
         {
-            return await _context.ProductCategories.FindAsync(id);
+            var category = await _categoryRepository.GetCategoryByIdAsync(id);
+            return _mapper.Map<CategoryDto>(category);
         }
 
         [HttpPost("add")]
-        // [HttpPost]
         public async Task<ActionResult<CategoryDto>> AddCategory(CategoryDto categoryDto)
         {
-            if (await CategoryExists(categoryDto.Category)) return BadRequest("This category has already been entered.");
-            var cat = new ProductCategory
-            {
-                Category = categoryDto.Category
-            };
-
-            _context.ProductCategories.Add(cat);
-            await _context.SaveChangesAsync();
-
-            return new CategoryDto
-            {
-                Category = cat.Category
-            };
-        } 
-
-        private async Task<bool> CategoryExists(string category)
-        {
-            return await _context.ProductCategories.AnyAsync(x => x.Category == category);
+            return await _categoryRepository.AddCategoryAsync(categoryDto);
         }
-
     }
 }
