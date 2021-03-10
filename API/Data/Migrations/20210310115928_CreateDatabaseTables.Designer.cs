@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210308231044_CreateDatabaseTables")]
+    [Migration("20210310115928_CreateDatabaseTables")]
     partial class CreateDatabaseTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,7 +120,7 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Inventory", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", "AppUser")
+                    b.HasOne("API.Entities.AppUser", null)
                         .WithMany("Inventories")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -131,10 +131,6 @@ namespace API.Data.Migrations
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("ProductCategory");
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
