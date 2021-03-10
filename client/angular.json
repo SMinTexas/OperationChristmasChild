@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/bootswatch/dist/spacelab/bootstrap.css",
@@ -40,7 +41,9 @@
               "node_modules/primeicons/primeicons.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -104,6 +107,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []

@@ -1,4 +1,9 @@
-export interface Inventory {
+import { DecimalPipe } from "@angular/common";
+
+export interface UserInventory {
+    appUserId: number;
+    userName: string;
+    inventoryId: number;
     item: string;
     itemDescription: string;
     itemPrice: number;
@@ -7,7 +12,6 @@ export interface Inventory {
     gender: string;
     bestPrice: number;
     lastPurchasedDate: Date;
-    notes: Text;
-    appUserId: number;
+    notes: string;
     productCategoryId: number;
 }

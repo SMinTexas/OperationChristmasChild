@@ -16,14 +16,13 @@ namespace API.DTOs
         public decimal ItemPrice { get; set; }
         [Required]
         public int ItemCount { get; set; }
+        public string AgeRange { get; set; }
+        public string Gender { get; set; }
         public decimal BestPrice { get; set; }
         public DateTime LastPurchasedDate { get; set; }
         public string Notes { get; set; }
-        [ForeignKey("AppUserId")]
         public int AppUserId { get; set; }
-        public virtual AppUser AppUser { get; set; }
-        [ForeignKey("ProductCategoryId")]
         public int ProductCategoryId { get; set; }
-        public virtual ProductCategory ProductCategory { get; set; }
+        public string Category { get; set; }
     }
 }

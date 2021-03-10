@@ -11,4 +11,5 @@ namespace API.Data
         public DbSet<ProductCategory> ProductCategories {get; set;}
         public DbSet<Inventory> Inventories {get; set;}
     }
+    
 }

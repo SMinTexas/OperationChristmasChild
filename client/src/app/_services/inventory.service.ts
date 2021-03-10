@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 // import { Category } from '../_models/category';
 // import { Gender } from '../_models/gender';
 import { Inventory } from '../_models/inventory';
+import { UserInventory } from '../_models/userInventory';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,33 @@ export class InventoryService {
 
   constructor(private http: HttpClient) { }
 
-  // getAges(model: any)
+  getProductInventories()
+  {
+    return this.http.get(this.baseUrl + 'inventories')
+      .toPromise()
+      .then(res => <Inventory[]> res)
+      .then(data => { return data })
+  }
+
+  // getProductInventories(user: number)
+  // {
+  //   return this.http.get(this.baseUrl + 'inventories')
+  //     .toPromise()
+  //     .then(res => <UserInventory[]> res)
+  //     .then(data => { return data })
+  // }
+
+  // getProductInventories(model: any)
+  // {
+  //   return this.http.get<Inventory>(this.baseUrl + 'inventories', model);
+  // }
+
+
+
+
+
+
+    // getAges(model: any)
   // {
   //   return this.http.get<Age>(this.baseUrl + 'ages', model);
   // }
@@ -39,13 +66,5 @@ export class InventoryService {
   //     .then(res => <Age[]> res)
   //     .then(data => { return data })    
   // }
-
-  getProductInventories()
-  {
-    return this.http.get(this.baseUrl + 'inventories')
-      .toPromise()
-      .then(res => <Inventory[]> res)
-      .then(data => { return data })
-  }
 
 }

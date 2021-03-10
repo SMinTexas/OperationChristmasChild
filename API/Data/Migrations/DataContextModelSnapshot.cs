@@ -55,11 +55,19 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("AgeRange")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("BestPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Item")
                         .IsRequired()
@@ -111,7 +119,7 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Inventory", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
-                        .WithMany()
+                        .WithMany("Inventories")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -125,6 +133,11 @@ namespace API.Data.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("ProductCategory");
+                });
+
+            modelBuilder.Entity("API.Entities.AppUser", b =>
+                {
+                    b.Navigation("Inventories");
                 });
 #pragma warning restore 612, 618
         }

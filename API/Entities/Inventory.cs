@@ -16,15 +16,16 @@ namespace API.Entities
         public decimal ItemPrice { get; set; }
         [Required]
         public int ItemCount { get; set; }
-        [Column(TypeName = "decimal(18,2)")]
+        [Required]
+        public string AgeRange { get; set; }
+        [Required]
+        public string Gender { get; set; }
+        [Column(TypeName="decimal(18,2)")]
         public decimal BestPrice { get; set; }
         public DateTime LastPurchasedDate { get; set; }
         public string Notes { get; set; }
         public int AppUserId { get; set; }
-        [ForeignKey("AppUserId")]
-        public virtual AppUser AppUser { get; set; }
         public int ProductCategoryId { get; set; }
-        [ForeignKey("ProductCategoryId")]
-        public virtual ProductCategory ProductCategory { get; set; }
     }
+
 }

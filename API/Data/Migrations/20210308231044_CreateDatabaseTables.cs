@@ -3,10 +3,41 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Data.Migrations
 {
-    public partial class CreateInventories : Migration
+    public partial class CreateDatabaseTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ProductCategories",
+                columns: table => new
+                {
+                    ProductCategoryId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Category = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductCategories", x => x.ProductCategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserName = table.Column<string>(type: "TEXT", nullable: false),
+                    EMail = table.Column<string>(type: "TEXT", nullable: false),
+                    PasswordHash = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    PasswordSalt = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.AppUserId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Inventories",
                 columns: table => new
@@ -17,6 +48,8 @@ namespace API.Data.Migrations
                     ItemDescription = table.Column<string>(type: "TEXT", nullable: false),
                     ItemPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ItemCount = table.Column<int>(type: "INTEGER", nullable: false),
+                    AgeRange = table.Column<string>(type: "TEXT", nullable: false),
+                    Gender = table.Column<string>(type: "TEXT", nullable: false),
                     BestPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     LastPurchasedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Notes = table.Column<string>(type: "TEXT", nullable: true),
@@ -55,6 +88,12 @@ namespace API.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Inventories");
+
+            migrationBuilder.DropTable(
+                name: "ProductCategories");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

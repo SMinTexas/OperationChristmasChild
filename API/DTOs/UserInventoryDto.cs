@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Entities
+namespace API.DTOs
 {
-    public class AppUser
+    public class UserInventoryDto
     {
         public int AppUserId { get; set; }
         [Required]
@@ -12,11 +12,9 @@ namespace API.Entities
         [Required]
         public string EMail { get; set; }
         [Required]
-        public byte[] PasswordHash { get; set; }
-        [Required]
-        public byte[] PasswordSalt { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime UpdatedDate { get; set; } = DateTime.Now;
-        public virtual ICollection<Inventory> Inventories {get; set;}
+        public virtual ICollection<InventoryDto> Inventories {get; set;}
+
     }
 }

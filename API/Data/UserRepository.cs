@@ -14,14 +14,18 @@ namespace API.Data
             _context = context;
         }
 
-        public async Task<AppUser> GetUserByIdAsync(int id)
+        public async Task<AppUser> GetUserByUserNameAsync(string username)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users
+                .Include(i => i.Inventories)
+                .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                .Include(i => i.Inventories)
+                .ToListAsync();
         }
 
         public void Update(AppUser user)
