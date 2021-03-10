@@ -44,9 +44,9 @@ namespace API.Data
             return await _context.ProductCategories.ToListAsync();
         }
 
-        public async Task<ProductCategory> GetCategoryByIdAsync(int productCategoriId)
+        public async Task<ProductCategory> GetCategoryByIdAsync(int productCategoryId)
         {
-            return await _context.ProductCategories.SingleOrDefaultAsync(pc => pc.ProductCategoryId == productCategoriId);
+            return await _context.ProductCategories.SingleOrDefaultAsync(pc => pc.ProductCategoryId == productCategoryId);
         }
 
         public void Update(ProductCategory category)
