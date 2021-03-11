@@ -8,7 +8,7 @@
         <hr>
         <div class="container mt-3">
             <h4 class="lead">{{user.username | titlecase}}'s Inventory</h4>
-            <p-table [value]="productInventories"
+            <p-table [value]="productInventory"
                 styleClass="p-datatable-sm p-datatable-striped"
                 [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -29,29 +29,19 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-productInventory>
                     <tr>
-                        <td>{{productInventory.productCategoryId}}</td>
+                        <td>{{productInventory.category}}</td>
                         <td>{{productInventory.item}}</td>
-                        <td>{{productInventory.ageId}}</td>
-                        <td>{{productInventory.genderId}}</td>
+                        <td>{{productInventory.ageRange}}</td>
+                        <td>{{productInventory.gender}}</td>
                         <td>{{productInventory.itemPrice}}</td>
                         <td>{{productInventory.itemCount}}</td>
                         <td>{{productInventory.itemDescription}}</td>
                         <td>{{productInventory.bestPrice}}</td>
-                        <td>{{productInventory.lastPurchasedDate}}</td>
+                        <td>{{productInventory.lastPurchasedDate | date}}</td>
                         <td>{{productInventory.notes}}</td>
                     </tr>
                 </ng-template>
             </p-table>
-            <!-- <ag-grid-angular [gridOptions]={gridOptions}></ag-grid-angular> -->
-            <!-- <ag-grid-angular 
-                style="width: 1000px; height: 500px" 
-                class="ag-theme-blue" 
-                [rowData]="rowData" 
-                [columnDefs]="columnDefs"
-                pagination=true
-                paginationPageSize=25
-            >
-            </ag-grid-angular> -->
         </div>
     </div>
 

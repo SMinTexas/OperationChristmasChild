@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Category } from '../_models/category';
 import { environment } from 'src/environments/environment';
 
@@ -10,15 +10,10 @@ export class CategoryService {
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
- 
-  // httpHeader = {
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/json; charset=utf-8'
-  //   })
-  // }
 
   getCategories(model: any) 
   {
+    console.log("Running getCategories");
     return this.http.get<Category>(this.baseUrl + 'categories', model);
   }
  
@@ -33,6 +28,7 @@ export class CategoryService {
 
   getProductCategories()
   {
+    console.log("Running getProductCategories");
     return this.http.get(this.baseUrl + 'categories')
       .toPromise()
       .then(res => <Category[]> res)
