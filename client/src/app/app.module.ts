@@ -27,6 +27,7 @@ import { AgeRangeComponent } from './ages/age-range/age-range.component';
 import { GenderComponent } from './genders/gender/gender.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -58,6 +59,7 @@ import { ChartsModule } from 'ng2-charts';
     SharedModule,
     AgGridModule.withComponents([]),
     TableModule,
+    ButtonModule,
     ChartsModule
   ],
   providers: [

@@ -84,6 +84,7 @@ namespace API.Data
         {
             List<InventoryDto> listItems = new List<InventoryDto>();
             List<Inventory> items = await _context.Inventories.Where(i => i.AppUserId == userId).ToListAsync();
+
             foreach (var item in items)
             {
                 listItems.Add(new InventoryDto
@@ -103,7 +104,15 @@ namespace API.Data
                     Category = (await _context.ProductCategories.Where(pc => pc.ProductCategoryId == item.ProductCategoryId).FirstOrDefaultAsync()).Category
                 });
             }
-            return listItems;
+
+            var listItemsToReturn = listItems.OrderBy(i => i.Category)
+                .ThenBy(i => i.Item)
+                .ThenBy(i => i.Gender)
+                .ThenBy(i => i.AgeRange)
+                .ThenBy(i => i.ItemPrice)
+                .ThenBy(i => i.ItemCount);
+
+            return listItemsToReturn;
         }
 
         public async Task<ActionResult<InventoryDto>> GetItemAsync(int userId, int inventoryId)

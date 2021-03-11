@@ -10,4 +10,5 @@ export interface Inventory {
     notes: Text;
     appUserId: number;
     productCategoryId: number;
+    category: string;
 }

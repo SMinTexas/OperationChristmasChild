@@ -21,7 +21,8 @@ export class InventoryListComponent implements OnInit {
   errorMsg: string = "";
   addInventoryMode = false;
   productInventory: Inventory[];
-  lastPurchasedDateConverted: Date;
+  //lastPurchasedDateConverted: Date;
+  rowGroupMetaData: any;
 
   constructor(
     private accountService: AccountService,
@@ -35,11 +36,45 @@ export class InventoryListComponent implements OnInit {
   ngOnInit(): void 
   {
     this.getProductInventories(this.user.appUserId);
+    this.updateRowGroupMetaData();
   }
 
   cancel()
   {
     this.router.navigateByUrl('/dashboard');
+  }
+
+  onSort()
+  {
+    this.updateRowGroupMetaData();
+  }
+
+  updateRowGroupMetaData()
+  {
+    this.rowGroupMetaData = {};
+
+    if (this.productInventory)
+    {
+      for (let i = 0; i < this.productInventory.length; i++)
+      {
+        let rowData = this.productInventory[i];
+        let categoryName = rowData.category;
+
+        if (i == 0)
+        {
+          this.rowGroupMetaData[categoryName] = { index: 0, size: 1 };
+        }
+        else
+        {
+          let previousRowData = this.productInventory[i - 1];
+          let previousRowGroup = previousRowData.category;
+          if (categoryName == previousRowGroup)
+            this.rowGroupMetaData[categoryName].size++;
+          else  
+            this.rowGroupMetaData[categoryName] = { index: i, size: 1 };
+        }
+      }
+    }
   }
 
   addInventoryToggle()
