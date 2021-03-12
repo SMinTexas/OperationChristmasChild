@@ -25,9 +25,9 @@ import { ProductCategoriesComponent } from './categories/product-categories/prod
 import { AddProductCategoryComponent } from './categories/add-product-category/add-product-category.component';
 import { AgeRangeComponent } from './ages/age-range/age-range.component';
 import { GenderComponent } from './genders/gender/gender.component';
-import { AgGridModule } from 'ag-grid-angular';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ChartsModule } from 'ng2-charts';
@@ -59,9 +59,9 @@ import { ChartsModule } from 'ng2-charts';
     BrowserAnimationsModule,
     FormsModule,
     SharedModule,
-    AgGridModule.withComponents([]),
     TableModule,
     ButtonModule,
+    RippleModule,
     InputTextModule,
     PasswordModule,
     ChartsModule

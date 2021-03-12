@@ -2,3 +2,8 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.p-button {
+    margin-right: .25rem;
+    margin-left: .25rem;
+}

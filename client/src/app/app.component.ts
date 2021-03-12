@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { User } from './_models/user';
+import { PrimeNGConfig } from 'primeng/api';
 import { AccountService } from './_services/account.service';
+import { User } from './_models/user';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +12,14 @@ export class AppComponent implements OnInit {
   title = 'Operation Christmas Child';
   users: any;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private primengConfig: PrimeNGConfig) {}
   ngOnInit() {
     this.setCurrentUser();
+    this.primengConfig.ripple = true;
   }
 
   setCurrentUser()
   {
-    //const user: User = JSON.parse(localStorage.getItem('user') ?? '{}');
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
       this.accountService.setCurrentUser(user);
