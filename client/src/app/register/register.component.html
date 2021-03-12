@@ -57,17 +57,29 @@
     </div>
 
     <div class="form-group text-center">
-        <button 
-            class="btn btn-success mr-2" 
+        <button
             type="submit"
+            pButton
+            pRipple
+            label="Register"
+            style="width:10rem"
+            class="p-button-success p-button p-button-rounded p-mx-2"
+            icon="pi pi-plus-circle"
+            iconPos="left"
             [disabled]="!model.username || !model.email || !model.password"
-        >Register
+        >
         </button>
-        <button 
-            class="btn btn-primary mr-2" 
-            type="button" 
+        <button
+            type="button"
+            pButton
+            pRipple
+            label="Cancel"
+            style="width:10rem"
+            class="p-button-info p-button-rounded p-mx-2"
+            icon="pi pi-times-circle"
+            iconPos="left"
             (click)="cancel()"
-        >Cancel
+        >
         </button>
     </div>
 </form>

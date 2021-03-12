@@ -1,8 +1,28 @@
 <div class="container mt-5">
     <div *ngIf="!addCategoryMode" style='text-align: center;'>
         <div class="text-center">
-            <button class="btn btn-primary btn-lg mr-2" (click)="addCategoryToggle()" >Add Category</button>
-            <button class="btn btn-info btn-lg" (click)="cancel()">Cancel</button>
+            <button 
+                type="button" 
+                pButton 
+                pRipple
+                label="Add"
+                style="width:8rem"
+                class="p-button-success p-button p-px-6"
+                icon="pi pi-plus-circle" 
+                iconPos="left" 
+                (click)="addCategoryToggle()">
+            </button>
+            <button
+                type="button"
+                pButton
+                pRipple
+                label="Cancel"
+                style="width:8rem"
+                class="p-button-info p-button p-px-6"
+                icon="pi pi-times-circle"
+                iconPos="left"
+                (click)="cancel()">
+            </button>
         </div>
         <br>
         <hr>

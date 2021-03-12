@@ -3,8 +3,27 @@
         <img src="../../assets/images/occ.jpg" alt="occ" width="400" height="450">
         <p class="lead">Register your account</p>
         <div class="text-center">
-            <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
-            <button class="btn btn-info btn-lg">Learn More</button>
+            <button
+                type="button"
+                pButton
+                pRipple
+                label="Register"
+                style="width:10rem"
+                class="p-button-success p-button p-button-rounded p-mx-2"
+                icon="pi pi-user-plus"
+                iconPos="left"
+                (click)="registerToggle()">
+            </button>
+            <button
+                type="button"
+                pButton
+                pRipple
+                label="Learn More"
+                style="width:10rem"
+                class="p-button-info p-button p-button-rounded p-mx-2"
+                icon="pi pi-info"
+                iconPos="left">
+            </button>
         </div>
     </div>
 

@@ -22,17 +22,26 @@
 
     <div class="form-group text-center">
         <button 
-            class="btn btn-success mr-2" 
-            [disabled]="!model.category"
-            type="submit"
-        >Add
-        </button>
-        <button 
-            class="btn btn-primary mr-2" 
-            type="button" 
-            (click)="cancel()"
-        >Cancel
-        </button>
+                type="submit" 
+                pButton 
+                pRipple
+                label="Add"
+                style="width:8rem"
+                class="p-button-success p-button p-px-6"
+                icon="pi pi-plus-circle" 
+                iconPos="left">
+            </button>
+            <button
+                type="button"
+                pButton
+                pRipple
+                label="Cancel"
+                style="width:8rem"
+                class="p-button-info p-button p-px-6"
+                icon="pi pi-times-circle"
+                iconPos="left"
+                (click)="cancel()">
+            </button>
     </div>
 </form>
 
