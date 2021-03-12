@@ -28,6 +28,8 @@ import { GenderComponent } from './genders/gender/gender.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -60,6 +62,8 @@ import { ChartsModule } from 'ng2-charts';
     AgGridModule.withComponents([]),
     TableModule,
     ButtonModule,
+    InputTextModule,
+    PasswordModule,
     ChartsModule
   ],
   providers: [
