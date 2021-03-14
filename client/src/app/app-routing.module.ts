@@ -43,6 +43,7 @@ const routes: Routes = [
       {path: 'inventories/add', component: InventoryAddComponent},
       {path: 'inventory/edit/:id', component: InventoryEditComponent},
       {path: 'categories', component: ProductCategoriesComponent},
+      {path: 'categories/:category', component: ProductCategoriesComponent},
       {path: 'categories/add', component: AddProductCategoryComponent},
       {path: 'ages', component: AgeRangeComponent},
       {path: 'genders', component: GenderComponent}

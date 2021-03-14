@@ -9,7 +9,7 @@ namespace API.Interfaces
     public interface ICategoryRepository 
     {
         Task<IEnumerable<ProductCategory>> GetCategoriesAsync();
-        Task<ProductCategory> GetCategoryByIdAsync(int productCategoryId);
+        Task<ProductCategory> GetCategoryByNameAsync(string productCategory);
         Task<ActionResult<CategoryDto>> AddCategoryAsync(CategoryDto categoryDto);
     }
 }

@@ -19,4 +19,10 @@ export class InventoryService {
       .then(data => { return data })
   }
 
+  addInventory(inventory: Inventory)
+  {
+    return this.http.post<Inventory>(this.baseUrl + 'inventories/add', inventory);
+  }
+
+
 }

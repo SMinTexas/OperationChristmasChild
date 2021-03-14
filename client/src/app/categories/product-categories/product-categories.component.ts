@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 import { User } from 'src/app/_models/user';
 import { Category } from 'src/app/_models/category';
 import { AccountService } from 'src/app/_services/account.service';
 import { CategoryService } from 'src/app/_services/category.service';
-import { environment } from 'src/environments/environment';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-categories',
@@ -21,6 +21,7 @@ export class ProductCategoriesComponent implements OnInit {
   baseUrl = environment.apiUrl;
   addCategoryMode = false;
   categories: any;
+  categoryRows: Category[] = [];
   model: any = {};
   user: User;
   successMsg: string = "";
@@ -49,12 +50,15 @@ export class ProductCategoriesComponent implements OnInit {
 
   ngOnInit(): void 
   { 
-    this.getProductCategories();
+    this.getAllProductCategories();
   }
 
-  getProductCategories()
+  getAllProductCategories()
   {
-    this.categoryService.getProductCategories().then(data => this.productCategories = data);
+    this.categoryService.getAllProductCategories().subscribe((response: Category[]) => {
+      this.categoryRows = response;
+      console.log('this.categoryRows = ', this.categoryRows);
+    })
   }
 
   cancel()

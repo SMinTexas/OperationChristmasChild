@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 import { take } from 'rxjs/operators';
+
+import { Category } from 'src/app/_models/category';
 import { Inventory } from 'src/app/_models/inventory';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { CategoryService } from 'src/app/_services/category.service';
 import { InventoryService } from 'src/app/_services/inventory.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-inventory-list',
@@ -15,17 +18,17 @@ import { environment } from 'src/environments/environment';
 })
 export class InventoryListComponent implements OnInit {
   baseUrl = environment.apiUrl;
-  categories: any;
-  model: any;
+  //categories: Category[];
+  categoryRows: Category[] = [];
   user: User;
   errorMsg: string = "";
   addInventoryMode = false;
   productInventory: Inventory[];
-  //lastPurchasedDateConverted: Date;
   rowGroupMetaData: any;
 
   constructor(
     private accountService: AccountService,
+    private categoryService: CategoryService,
     private inventoryService: InventoryService,
     private router: Router,
     private toastr: ToastrService) 
@@ -35,6 +38,8 @@ export class InventoryListComponent implements OnInit {
 
   ngOnInit(): void 
   {
+    //this.getProductCategories();
+    this.getAllProductCategories();
     this.getProductInventories(this.user.appUserId);
     this.updateRowGroupMetaData();
   }
@@ -90,5 +95,17 @@ export class InventoryListComponent implements OnInit {
   getProductInventories(appUserId: number)
   {
     this.inventoryService.getProductInventories(appUserId).then(data => this.productInventory = data);
+  }
+
+  // getProductCategories()
+  // {
+  //   this.categoryService.getProductCategories().then(data => this.categories = data);
+  // }
+
+  getAllProductCategories()
+  {
+    this.categoryService.getAllProductCategories().subscribe((response: Category[]) => {
+      this.categoryRows = response;
+    })
   }
 }

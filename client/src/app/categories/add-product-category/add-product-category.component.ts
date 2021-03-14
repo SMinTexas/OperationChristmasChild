@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from 'src/app/_services/category.service';
-import { InventoryService } from 'src/app/_services/inventory.service';
 
 @Component({
   selector: 'app-add-product-category',
@@ -17,7 +16,6 @@ export class AddProductCategoryComponent implements OnInit {
 
   constructor(
       private categoryService: CategoryService,
-      private inventoryService: InventoryService,  
       private toastr: ToastrService) { }
 
   ngOnInit(): void { }

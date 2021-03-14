@@ -2,6 +2,7 @@ using API.DTOs;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,10 +26,10 @@ namespace API.Controllers
             return Ok(categoriesToReturn);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryDto>> GetCategoryAsync(int id)
+        [HttpGet("{pc}")]
+        public async Task<ActionResult<CategoryDto>> GetCategoryAsync(string pc)
         {
-            var category = await _categoryRepository.GetCategoryByIdAsync(id);
+            var category = await _categoryRepository.GetCategoryByNameAsync(pc);
             return _mapper.Map<CategoryDto>(category);
         }
 

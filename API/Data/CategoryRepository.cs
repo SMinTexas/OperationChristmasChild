@@ -3,6 +3,7 @@ using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -44,15 +45,16 @@ namespace API.Data
             return await _context.ProductCategories.ToListAsync();
         }
 
-        public async Task<ProductCategory> GetCategoryByIdAsync(int productCategoryId)
+        public async Task<ProductCategory> GetCategoryByNameAsync(string productCategory)
         {
-            return await _context.ProductCategories.SingleOrDefaultAsync(pc => pc.ProductCategoryId == productCategoryId);
+            return await _context.ProductCategories.FirstOrDefaultAsync(pc => pc.Category == productCategory);
         }
 
         public void Update(ProductCategory category)
         {
             _context.Entry(category).State = EntityState.Modified;
-        }    
+        }   
+         
         private async Task<bool> CategoryExists(string category)
         {
             return await _context.ProductCategories.AnyAsync(x => x.Category == category);
