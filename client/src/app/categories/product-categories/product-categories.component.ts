@@ -84,4 +84,9 @@ export class ProductCategoriesComponent implements OnInit {
       this.addCategoryForm.reset(this.categories);
     })
   }
+
+  handleRefresh(event)
+  {
+    this.getAllProductCategories();
+  }
 }
