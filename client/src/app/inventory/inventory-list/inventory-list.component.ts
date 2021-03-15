@@ -40,6 +40,7 @@ export class InventoryListComponent implements OnInit {
   {
     //this.getProductCategories();
     this.getAllProductCategories();
+    console.log('categoryRows: ', this.categoryRows)
     this.getProductInventories(this.user.appUserId);
     this.updateRowGroupMetaData();
   }
@@ -107,5 +108,12 @@ export class InventoryListComponent implements OnInit {
     this.categoryService.getAllProductCategories().subscribe((response: Category[]) => {
       this.categoryRows = response;
     })
+  }
+
+  handleRefresh(event)
+  {
+    this.getAllProductCategories();
+    this.getProductInventories(this.user.appUserId);
+    this.updateRowGroupMetaData();
   }
 }

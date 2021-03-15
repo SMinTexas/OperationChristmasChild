@@ -27,45 +27,75 @@
         <br>
         <hr>
         <div class="container mt-3">
-            <h4 class="lead">{{user.username | titlecase}}'s Inventory</h4>
-            <p-table [value]="productInventory" sortField="category" sortMode="single" (onSort)="onSort()"
-                styleClass="p-datatable-sm p-datatable-striped" dataKey="productInventory.category"
-                [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            <p-table
+                [value]="productInventory"
+                styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
+                [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
-                [rowsPerPageOptions]="[10,20,50,100]">
+                [rowsPerPageOptions]="[5,10,20,{showAll:'All'}]"
+                sortField="category" sortMode="single" (onSort)="onSort()" dataKey="category">
+
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-ai-xl-stretch p-jc-xl-between">
+                        <h4>{{user.username | titlecase}}'s Inventory</h4>
+                        <p-button (onClick)="handleRefresh($event)" icon="pi pi-refresh"></p-button>
+                    </div>
+                </ng-template>
+
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Product Category</th>
-                        <th>Item</th>
-                        <th>Item Description</th>
-                        <th>Gender</th>
-                        <th>Age Range</th>
-                        <th>Item Count</th>
-                        <th>Item Price</th>
-                        <th>Best Price</th>
-                        <th>Last Purchased Date</th>
-                        <th>Notes</th>
+                        <th class="header2">Category</th>
+                        <th class="header2">Item Name</th>
+                        <th class="header4">Item Description</th>
+                        <th class="header1">Age Range</th>
+                        <th class="header1">Gender</th>
+                        <th class="header1">Item Count</th>
+                        <th class="header1">Item Price</th>
+                        <th class="header1">Best Price</th>
+                        <th class="header3">Last Purchased Date</th>
+                        <th class="header4">Notes</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-productInventory let-rowIndex="rowIndex">
+
+                <ng-template pTemplate="body" let-productInventory let-expanded="expanded" let-rowIndex="rowIndex">
                     <tr *ngIf="rowGroupMetaData[productInventory.category].index === rowIndex">
-                        <td colspan="5">
+                        <td colspan="15">
+                            <button type="button" pButton pRipple [pRowToggler]="productInventory"
+                                class="p-button-text p-button-rounded p-button-plain p-mr-2"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                            </button>
                             <span class="p-text-bold p-ml-2">{{productInventory.category}}</span>
                         </td>
                     </tr>
+                </ng-template>
+
+                <ng-template pTemplate="rowexpansion" let-productInventory>
                     <tr>
-                        <td>{{productInventory.category}}</td>
+                        <td class="hide">{{productInventory.category}}</td>
                         <td>{{productInventory.item}}</td>
                         <td>{{productInventory.itemDescription}}</td>
-                        <td>{{productInventory.gender}}</td>
                         <td>{{productInventory.ageRange}}</td>
+                        <td>{{productInventory.gender}}</td>
                         <td>{{productInventory.itemCount}}</td>
-                        <td>{{productInventory.itemPrice}}</td>
-                        <td>{{productInventory.bestPrice}}</td>
+                        <td>{{productInventory.itemPrice | currency: 'USD'}}</td>
+                        <td>{{productInventory.bestPrice | currency: 'USD'}}</td>
                         <td>{{productInventory.lastPurchasedDate | date}}</td>
                         <td>{{productInventory.notes}}</td>
                     </tr>
                 </ng-template>
+
+                <!-- <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="6">There are no items to display for this product category.</td>
+                    </tr>
+                </ng-template> -->
+
+                <!-- <ng-template pTemplate="footer">
+                    <tr>
+                        <td colspan="15">You have a lot of stuff</td>
+                    </tr>
+                </ng-template> -->
+
             </p-table>
         </div>
     </div>
@@ -79,122 +109,3 @@
     </div>
 </div>
 
-
-<!-- <p-table [value]="productInventory"
-styleClass="p-datatable-lg p-datatable-striped"
-sortField="productInventory.category"
-sortMode="single"
-(onSort)="onSort()"
-dataKey="productInventory.category"
-[paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-[rowsPerPageOptions]="[10,20,50,100]">
-<ng-template pTemplate="header">
-    <tr>
-        <th style="width:10%; text-align: center;">Item Name</th>
-        <th style="width:7%; text-align: center;">Gender</th>
-        <th style="width:7%; text-align: center;">Age Range</th>
-        <th style="width:5%; text-align: center;">Item Price</th>
-        <th style="width:5%; text-align: center;">Item Count</th>
-        <th style="width:25%; text-align: center;">Item Description</th>
-        <th style="width:5%; text-align: center;">Best Price Paid</th>
-        <th style="width:12%; text-align: center;">Last Purchased Date</th>
-        <th style="width:25%; text-align: center;">Notes</th>
-    </tr>
-</ng-template>
-<ng-template pTemplate="body" let-productInventory let-rowIndex="rowIndex" let-expanded="expanded">
-    <tr *ngIf="rowGroupMetaData[productInventory.category].index === rowIndex">
-        <td colspan="9">
-            <button type="button" 
-                pButton 
-                pRipple 
-                [pRowToggler]="productInventory" 
-                class="p-button-text p-button-rounded p-button-plain p-mr-2"
-                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
-            </button>
-            <span class="p-text-bold p-ml-2">{{productInventory.category}}</span>
-        </td>
-    </tr>
-</ng-template>
-<ng-template pTemplate="rowexpansion" let-productInventory>
-    <tr>
-        <td>{{productInventory.item}}</td>
-        <td>{{productInventory.gender}}</td>
-        <td>{{productInventory.ageRange}}</td>
-        <td>{{productInventory.itemPrice}}</td>
-        <td>{{productInventory.itemCount}}</td>
-        <td>{{productInventory.itemDescription}}</td>
-        <td>{{productInventory.bestPrice}}</td>
-        <td>{{productInventory.lastPurchasedDate | date}}</td>
-        <td>{{productInventory.notes}}</td>
-    </tr>
-</ng-template>
-</p-table> -->
-
-
-            <!-- <p-table 
-                [value]="categories" 
-                styleClass="p-datatabe-lg p-datatable-striped"
-                dataKey="categories.category"
-                [paginator]="true"
-                [rows]="10"
-                [showCurrentPageReport]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items."
-                [rowsPerPageOptions]="[10,20,50,100]">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 5rem"></th>
-                        <th pSortableColumn="categories.category"></th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-categories let-expanded="expanded">
-                    <tr>
-                        <td>
-                            <button 
-                                type="button" 
-                                pButton 
-                                pRipple 
-                                [pRowToggler]="categories" 
-                                class="p-button-text p-button-rounded p-button-plain"
-                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-                        </td>
-                        <td>{{categories.category}}</td>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="rowexpansion" let-productInventory>
-                    <tr>
-                        <td colspan="7">
-                            <div class="p-p-3">
-                                <p-table [value]="productInventory" dataKey="item">
-                                    <ng-template pTemplate="header">
-                                        <tr>
-                                            <th pSortableColumn="item">Item</th>
-                                            <th>Item Description</th>
-                                            <th pSortableColumn="gender">Gender</th>
-                                            <th pSortableColumn="ageRange">Age Range</th>
-                                            <th pSortableColumn="cnt">Item Count</th>
-                                            <th pSortableColumn="price">Item Price</th>
-                                            <th pSortableColumn="best">Best Price</th>
-                                            <th pSortableColumn="date">Last Purchased Date</th>
-                                            <th>Item Notes</th>
-                                        </tr>
-                                    </ng-template>
-                                    <ng-template pTemplate="body" let-productInventory>
-                                        <tr>
-                                            <td>{{productInventory.item}}</td>
-                                            <td>{{productInventory.itemDescription}}</td>
-                                            <td>{{productInventory.gender}}</td>
-                                            <td>{{productInventory.ageRange}}</td>
-                                            <td>{{productInventory.itemCount}}</td>
-                                            <td>{{productInventory.itemPrice}}</td>
-                                            <td>{{productInventory.bestPrice}}</td>
-                                            <td>{{productInventory.lastPurchasedDate | date}}</td>
-                                            <td>{{productInventory.notes}}</td>
-                                        </tr>
-                                    </ng-template>
-                                </p-table>
-                            </div>
-                        </td>
-                    </tr>
-                </ng-template>
-            </p-table>             -->
