@@ -76,18 +76,6 @@ export class ProductCategoriesComponent implements OnInit {
     this.addCategoryMode = event;
   }
 
-  addCategory()
-  {
-    this.categoryService.addCategory(this.categories).subscribe(() => {
-      this.successMsg = "New Product Category - " + this.model.category + " - successfully added.";
-      this.toastr.success(this.successMsg, this.toastrTitleAdd);
-      this.addCategoryForm.reset(this.categories);
-    }, error => {
-      this.errorMsg = "New Product Category - " + this.model.category + " - failed for reason " + error.statusCode;
-      this.toastr.error(this.errorMsg, "New Product Category Error");
-    })
-  }
-
   handleRefresh(event)
   {
     this.getAllProductCategories();

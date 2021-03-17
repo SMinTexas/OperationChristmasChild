@@ -21,9 +21,6 @@ export class CategoryService {
   updateCategory(id: number, category: Category)
   {
     return this.http.put(this.baseUrl + 'categories/' + id, category);
-    // console.log('updateCategory with id = ', id);
-    // console.log('this is the url: ',this.baseUrl + 'categories?id=' + id);
-    // return this.http.put(this.baseUrl + 'categories?id=', id);
   }
 
   getProductCategory(pc: string)

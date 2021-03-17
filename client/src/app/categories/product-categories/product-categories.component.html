@@ -31,12 +31,14 @@
                 [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} categories"
                 [rowsPerPageOptions]="[5,10,{showAll:'All'}]">
+
                 <ng-template pTemplate="caption">
                     <div class="p-d-flex p-ai-xl-stretch p-jc-xl-between">
                         <h3>Product Categories</h3>
                         <p-button (onClick)="handleRefresh($event)" icon="pi pi-refresh"></p-button>
                     </div>
                 </ng-template>
+                
                 <ng-template pTemplate="body" let-categoryRows let-editing="editing" let-ri="rowIndex">
                     <tr [pEditableRow]="categoryRows">
                         <td>
@@ -49,7 +51,6 @@
                                 </ng-template>
                             </p-cellEditor>
                         </td>
-                        <!-- <td>{{categoryRows.category}}</td> -->
                         <td style="text-align: center">
                             <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(categoryRows)" class="p-button-rounded p-button-text"></button>
                             <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(categoryRows)" class="p-button-rounded p-button-text"></button>
