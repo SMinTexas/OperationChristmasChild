@@ -26,11 +26,13 @@ export class ProductCategoriesComponent implements OnInit {
   user: User;
   successMsg: string = "";
   errorMsg: string = "";
-  toastrTitle: string = "Add a New Product Category";
+  toastrTitleAdd: string = "Add a New Product Category";
+  toastrTitleUpdate: string = "Update a Product Category";
   warningMsg1: string = "Information:  ";
   warningMsg2: string = "You have made changes.  Any unsaved changes will be lost if you navigate away from this page.";
 
   productCategories: Category[];
+  clonedProductCategory: { [s: string]: Category; } = {};
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.addCategoryForm.dirty) {
@@ -39,7 +41,6 @@ export class ProductCategoriesComponent implements OnInit {
   }
 
   constructor(
-    private http: HttpClient, 
     private accountService: AccountService, 
     private categoryService: CategoryService,
     private router: Router,
@@ -57,7 +58,6 @@ export class ProductCategoriesComponent implements OnInit {
   {
     this.categoryService.getAllProductCategories().subscribe((response: Category[]) => {
       this.categoryRows = response;
-      console.log('this.categoryRows = ', this.categoryRows);
     })
   }
 
@@ -80,13 +80,39 @@ export class ProductCategoriesComponent implements OnInit {
   {
     this.categoryService.addCategory(this.categories).subscribe(() => {
       this.successMsg = "New Product Category - " + this.model.category + " - successfully added.";
-      this.toastr.success(this.successMsg, this.toastrTitle);
+      this.toastr.success(this.successMsg, this.toastrTitleAdd);
       this.addCategoryForm.reset(this.categories);
+    }, error => {
+      this.errorMsg = "New Product Category - " + this.model.category + " - failed for reason " + error.statusCode;
+      this.toastr.error(this.errorMsg, "New Product Category Error");
     })
   }
 
   handleRefresh(event)
   {
     this.getAllProductCategories();
+  }
+
+  onRowEditInit(category: Category)
+  {
+    this.clonedProductCategory[category.productCategoryId] = {...category}
+  }
+
+  onRowEditSave(category: Category)
+  {
+    this.categoryService.updateCategory(category.productCategoryId, category).subscribe(() => {
+      delete this.clonedProductCategory[category.productCategoryId];
+      this.successMsg = "Category " + category.category + " was successfully updated.";
+      this.toastr.success(this.successMsg, this.toastrTitleUpdate);
+    }, error => {
+      this.errorMsg = "Update Product Category - " + this.model.category + " - failed for reason " + error.statusCode;
+      this.toastr.error(this.errorMsg, "Update Product Category Error");
+    })
+  }
+
+  onRowEditCancel(category: Category, index: number)
+  {
+    this.categoryRows[index] = this.clonedProductCategory[category.productCategoryId];
+    delete this.clonedProductCategory[category.productCategoryId];
   }
 }

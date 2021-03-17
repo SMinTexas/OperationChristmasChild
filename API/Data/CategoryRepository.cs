@@ -40,6 +40,24 @@ namespace API.Data
             };            
         }
 
+        public async Task<ActionResult<CategoryDto>> EditCategoryAsync(int productCategoryId, CategoryDto categoryDto)
+        {
+            var cat = new ProductCategory
+            {
+                ProductCategoryId = productCategoryId,
+                Category = categoryDto.Category
+            };
+
+            _context.ProductCategories.Update(cat);    
+            await _context.SaveChangesAsync();
+
+            return new CategoryDto
+            {
+                ProductCategoryId = cat.ProductCategoryId,
+                Category = cat.Category
+            };
+        }
+
         public async Task<IEnumerable<ProductCategory>> GetCategoriesAsync()
         {
             return await _context.ProductCategories.ToListAsync();

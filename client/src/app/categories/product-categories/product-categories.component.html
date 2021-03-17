@@ -26,7 +26,8 @@
         <hr>
         <div class="container mt-3">
             <p-table
-                [value]="categoryRows" styleClass="p-datatable-sm p-datatable-striped"
+                [value]="categoryRows" dataKey="productCategoryId" editMode="row"
+                styleClass="p-datatable-sm p-datatable-striped"
                 [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} categories"
                 [rowsPerPageOptions]="[5,10,{showAll:'All'}]">
@@ -36,9 +37,24 @@
                         <p-button (onClick)="handleRefresh($event)" icon="pi pi-refresh"></p-button>
                     </div>
                 </ng-template>
-                <ng-template pTemplate="body" let-categoryRows>
-                    <tr>
-                        <td>{{categoryRows.category}}</td>
+                <ng-template pTemplate="body" let-categoryRows let-editing="editing" let-ri="rowIndex">
+                    <tr [pEditableRow]="categoryRows">
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="categoryRows.category">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{categoryRows.category}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <!-- <td>{{categoryRows.category}}</td> -->
+                        <td style="text-align: center">
+                            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(categoryRows)" class="p-button-rounded p-button-text"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(categoryRows)" class="p-button-rounded p-button-text"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(categoryRows, ri)" class="p-button-rounded p-button-text"></button>
+                        </td>
                     </tr>
                 </ng-template>
             </p-table>

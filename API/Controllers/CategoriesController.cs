@@ -38,5 +38,11 @@ namespace API.Controllers
         {
             return await _categoryRepository.AddCategoryAsync(categoryDto);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<CategoryDto>> EditCategory(int id, CategoryDto categoryDto)
+        {
+            return await _categoryRepository.EditCategoryAsync(id, categoryDto);
+        }
     }
 }

@@ -17,6 +17,7 @@ import { GenderComponent } from './genders/gender/gender.component';
 
 //Product Category components
 import { AddProductCategoryComponent } from './categories/add-product-category/add-product-category.component';
+import { EditProductCategoryComponent } from './categories/edit-product-category/edit-product-category.component';
 import { ProductCategoriesComponent } from './categories/product-categories/product-categories.component';
 
 //Inventory components
@@ -45,6 +46,7 @@ const routes: Routes = [
       {path: 'categories', component: ProductCategoriesComponent},
       {path: 'categories/:category', component: ProductCategoriesComponent},
       {path: 'categories/add', component: AddProductCategoryComponent},
+      {path: 'categories/:id', component: EditProductCategoryComponent},
       {path: 'ages', component: AgeRangeComponent},
       {path: 'genders', component: GenderComponent}
     ]

@@ -11,5 +11,6 @@ namespace API.Interfaces
         Task<IEnumerable<ProductCategory>> GetCategoriesAsync();
         Task<ProductCategory> GetCategoryByNameAsync(string productCategory);
         Task<ActionResult<CategoryDto>> AddCategoryAsync(CategoryDto categoryDto);
+        Task<ActionResult<CategoryDto>> EditCategoryAsync(int productCategoryId, CategoryDto categoryDto);
     }
 }

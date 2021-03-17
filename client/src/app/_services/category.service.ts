@@ -18,6 +18,14 @@ export class CategoryService {
     return this.http.post<Category>(this.baseUrl + 'categories/add', model);
   }
 
+  updateCategory(id: number, category: Category)
+  {
+    return this.http.put(this.baseUrl + 'categories/' + id, category);
+    // console.log('updateCategory with id = ', id);
+    // console.log('this is the url: ',this.baseUrl + 'categories?id=' + id);
+    // return this.http.put(this.baseUrl + 'categories?id=', id);
+  }
+
   getProductCategory(pc: string)
   {
     return this.http.get<Category>(this.baseUrl + 'categories/' + pc);
