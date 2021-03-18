@@ -24,8 +24,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductCategoriesComponent } from './categories/product-categories/product-categories.component';
 import { AddProductCategoryComponent } from './categories/add-product-category/add-product-category.component';
 import { EditProductCategoryComponent } from './categories/edit-product-category/edit-product-category.component';
-import { AgeRangeComponent } from './ages/age-range/age-range.component';
-import { GenderComponent } from './genders/gender/gender.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -50,8 +48,6 @@ import { ChartsModule } from 'ng2-charts';
     DashboardComponent,
     ProductCategoriesComponent,
     AddProductCategoryComponent,
-    AgeRangeComponent,
-    GenderComponent,
     EditProductCategoryComponent
   ],
   imports: [

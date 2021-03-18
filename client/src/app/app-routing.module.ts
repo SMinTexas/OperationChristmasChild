@@ -11,10 +11,6 @@ import { HomeComponent } from './home/home.component';
 //Dashboard component
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-//Lookup Data components
-import { AgeRangeComponent } from './ages/age-range/age-range.component';
-import { GenderComponent } from './genders/gender/gender.component';
-
 //Product Category components
 import { AddProductCategoryComponent } from './categories/add-product-category/add-product-category.component';
 import { EditProductCategoryComponent } from './categories/edit-product-category/edit-product-category.component';
@@ -46,9 +42,7 @@ const routes: Routes = [
       {path: 'categories', component: ProductCategoriesComponent},
       {path: 'categories/:category', component: ProductCategoriesComponent},
       {path: 'categories/add', component: AddProductCategoryComponent},
-      {path: 'categories/:id', component: EditProductCategoryComponent},
-      {path: 'ages', component: AgeRangeComponent},
-      {path: 'genders', component: GenderComponent}
+      {path: 'categories/:id', component: EditProductCategoryComponent}
     ]
   },
   {path: 'errors', component: TestErrorsComponent},
