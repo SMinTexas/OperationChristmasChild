@@ -40,7 +40,7 @@ namespace API.Controllers
             return await _inventoryRepository.AddItemAsync(inventoryDto);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         //[Route("api/inventories/{id}")]
         public async Task<ActionResult<InventoryDto>> Update(int id, InventoryDto inventoryDto)
         {

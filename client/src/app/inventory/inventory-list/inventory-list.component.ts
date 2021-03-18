@@ -18,13 +18,13 @@ import { InventoryService } from 'src/app/_services/inventory.service';
 })
 export class InventoryListComponent implements OnInit {
   baseUrl = environment.apiUrl;
-  //categories: Category[];
   categoryRows: Category[] = [];
   user: User;
   errorMsg: string = "";
   addInventoryMode = false;
   productInventory: Inventory[];
   rowGroupMetaData: any;
+  clonedInventory: { [s: string]: Inventory; } = {};
 
   constructor(
     private accountService: AccountService,
@@ -38,9 +38,7 @@ export class InventoryListComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    //this.getProductCategories();
     this.getAllProductCategories();
-    console.log('categoryRows: ', this.categoryRows)
     this.getProductInventories(this.user.appUserId);
     this.updateRowGroupMetaData();
   }
@@ -98,16 +96,34 @@ export class InventoryListComponent implements OnInit {
     this.inventoryService.getProductInventories(appUserId).then(data => this.productInventory = data);
   }
 
-  // getProductCategories()
-  // {
-  //   this.categoryService.getProductCategories().then(data => this.categories = data);
-  // }
-
   getAllProductCategories()
   {
     this.categoryService.getAllProductCategories().subscribe((response: Category[]) => {
       this.categoryRows = response;
     })
+  }
+
+  onRowEditInit(inventory: Inventory)
+  {
+    this.clonedInventory[inventory.inventoryId] = {...inventory}
+  }
+
+  onRowEditSave(inventory: Inventory)
+  {
+    this.inventoryService.updateInventory(inventory.inventoryId, inventory).subscribe(() => {
+      delete this.clonedInventory[inventory.inventoryId];
+      // this.successMsg = "Category " + category.category + " was successfully updated.";
+      // this.toastr.success(this.successMsg, this.toastrTitleUpdate);
+    }, error => {
+      // this.errorMsg = "Update Product Category - " + this.model.category + " - failed for reason " + error.statusCode;
+      this.toastr.error(this.errorMsg, "Update Product Category Error");
+    })
+  }
+
+  onRowEditCancel(inventory: Inventory, index: number)
+  {
+    this.productInventory[index] = this.clonedInventory[inventory.inventoryId];
+    delete this.clonedInventory[inventory.inventoryId];
   }
 
   handleRefresh(event)

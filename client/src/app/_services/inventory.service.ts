@@ -24,5 +24,8 @@ export class InventoryService {
     return this.http.post<Inventory>(this.baseUrl + 'inventories/add', inventory);
   }
 
-
+  updateInventory(id: number, inventory: Inventory)
+  {
+    return this.http.put(this.baseUrl + 'inventories/' + id, inventory);
+  }
 }

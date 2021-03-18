@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5" style="width:100%">
     <div  *ngIf="!addInventoryMode" style='text-align: center;'>
         <div class="text-center">
             <button 
@@ -28,7 +28,7 @@
         <hr>
         <div class="container mt-3">
             <p-table
-                [value]="productInventory"
+                [value]="productInventory" dataKey="inventoryId" editMode="row"
                 styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
                 [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
@@ -57,7 +57,7 @@
                     </tr>
                 </ng-template>
 
-                <ng-template pTemplate="body" let-productInventory let-expanded="expanded" let-rowIndex="rowIndex">
+                <!-- <ng-template pTemplate="body" let-productInventory let-expanded="expanded" let-rowIndex="rowIndex">
                     <tr *ngIf="rowGroupMetaData[productInventory.category].index === rowIndex">
                         <td colspan="15">
                             <button type="button" pButton pRipple [pRowToggler]="productInventory"
@@ -67,20 +67,119 @@
                             <span class="p-text-bold p-ml-2">{{productInventory.category}}</span>
                         </td>
                     </tr>
-                </ng-template>
+                </ng-template> -->
 
-                <ng-template pTemplate="rowexpansion" let-productInventory>
-                    <tr>
-                        <td class="hide">{{productInventory.category}}</td>
-                        <td>{{productInventory.item}}</td>
-                        <td>{{productInventory.itemDescription}}</td>
-                        <td>{{productInventory.ageRange}}</td>
-                        <td>{{productInventory.gender}}</td>
-                        <td>{{productInventory.itemCount}}</td>
-                        <td>{{productInventory.itemPrice | currency: 'USD'}}</td>
-                        <td>{{productInventory.bestPrice | currency: 'USD'}}</td>
-                        <td>{{productInventory.lastPurchasedDate | date}}</td>
-                        <td>{{productInventory.notes}}</td>
+                <!-- If I can get the expansion to work, the blow will be pTemplate="rowexpansion" -->
+                <ng-template pTemplate="body" let-productInventory let-editing="editing" let-ri="rowIndex">
+                    <tr [pEditableRow]="productInventory">
+                     
+                        <td><strong>{{productInventory.category}}</strong></td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="productInventory.item">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productInventory.item}}
+                                </ng-template>
+                            </p-cellEditor>             
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="productInventory.itemDescription">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productInventory.itemDescription}}
+                                </ng-template>
+                            </p-cellEditor> 
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="productInventory.ageRange">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productInventory.ageRange}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="productInventory.gender">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productInventory.gender}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="number" [(ngModel)]="productInventory.itemCount">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productInventory.itemCount}}
+                                </ng-template>
+                            </p-cellEditor> 
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="number" [(ngModel)]="productInventory.itemPrice">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productInventory.itemPrice | currency: 'USD'}}
+                                </ng-template>
+                            </p-cellEditor> 
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="number" [(ngModel)]="productInventory.bestPrice">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productInventory.bestPrice | currency: 'USD'}}
+                                </ng-template>
+                            </p-cellEditor> 
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="date" [(ngModel)]="productInventory.lastPurchasedDate">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productInventory.lastPurchasedDate | date}}
+                                </ng-template>
+                            </p-cellEditor>  
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="productInventory.notes">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productInventory.notes}}
+                                </ng-template>
+                            </p-cellEditor> 
+                        </td>
+
+                        <td style="text-align: center">
+                            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(productInventory)" class="p-button-rounded p-button-text"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(productInventory)" class="p-button-rounded p-button-text"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(productInventory, ri)" class="p-button-rounded p-button-text"></button>
+                        </td>   
+
                     </tr>
                 </ng-template>
 
@@ -109,3 +208,14 @@
     </div>
 </div>
 
+                        <!-- <td class="hide">{{productInventory.category}}</td> -->
+
+                        <!-- <td>{{productInventory.item}}</td>
+                        <td>{{productInventory.itemDescription}}</td>
+                        <td>{{productInventory.ageRange}}</td>
+                        <td>{{productInventory.gender}}</td>
+                        <td>{{productInventory.itemCount}}</td>
+                        <td>{{productInventory.itemPrice | currency: 'USD'}}</td>
+                        <td>{{productInventory.bestPrice | currency: 'USD'}}</td>
+                        <td>{{productInventory.lastPurchasedDate | date}}</td>
+                        <td>{{productInventory.notes}}</td> -->
