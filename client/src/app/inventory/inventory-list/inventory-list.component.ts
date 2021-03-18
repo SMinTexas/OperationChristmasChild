@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/environments/environment';
 import { take } from 'rxjs/operators';
 
 import { Category } from 'src/app/_models/category';
@@ -10,6 +8,7 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { CategoryService } from 'src/app/_services/category.service';
 import { InventoryService } from 'src/app/_services/inventory.service';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
   selector: 'app-inventory-list',
@@ -17,21 +16,19 @@ import { InventoryService } from 'src/app/_services/inventory.service';
   styleUrls: ['./inventory-list.component.css']
 })
 export class InventoryListComponent implements OnInit {
-  baseUrl = environment.apiUrl;
-  categoryRows: Category[] = [];
-  user: User;
-  errorMsg: string = "";
   addInventoryMode = false;
+  categoryRows: Category[] = [];
+  clonedInventory: { [s: string]: Inventory; } = {};
   productInventory: Inventory[];
   rowGroupMetaData: any;
-  clonedInventory: { [s: string]: Inventory; } = {};
+  user: User;
 
   constructor(
     private accountService: AccountService,
     private categoryService: CategoryService,
     private inventoryService: InventoryService,
-    private router: Router,
-    private toastr: ToastrService) 
+    private messageService: MessageService,
+    private router: Router) 
   { 
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
@@ -112,11 +109,9 @@ export class InventoryListComponent implements OnInit {
   {
     this.inventoryService.updateInventory(inventory.inventoryId, inventory).subscribe(() => {
       delete this.clonedInventory[inventory.inventoryId];
-      // this.successMsg = "Category " + category.category + " was successfully updated.";
-      // this.toastr.success(this.successMsg, this.toastrTitleUpdate);
+      this.messageService.updateInventorySuccessMsg(inventory.item);
     }, error => {
-      // this.errorMsg = "Update Product Category - " + this.model.category + " - failed for reason " + error.statusCode;
-      this.toastr.error(this.errorMsg, "Update Product Category Error");
+      this.messageService.updateInventoryErrorMsg(error);
     })
   }
 

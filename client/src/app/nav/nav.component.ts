@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { User } from '../_models/user';
+
 import { AccountService } from '../_services/account.service';
+import { MessageService } from '../_services/message.service';
 
 @Component({
   selector: 'app-nav',
@@ -15,9 +14,9 @@ export class NavComponent implements OnInit {
   errorMsg: string = '';
 
   constructor(
-    public accountService: AccountService, 
-    private router: Router, 
-    private toastr: ToastrService) { }
+    public accountService: AccountService,
+    private messageService: MessageService, 
+    private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -26,8 +25,7 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/dashboard'); 
     }, error => {
-      this.errorMsg = error.url + ' http status code: ' + error.status;
-      this.toastr.error(error.error, this.errorMsg);
+      this.messageService.loginErrorMsg(error);
     })
   }
 

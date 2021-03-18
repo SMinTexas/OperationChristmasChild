@@ -10,6 +10,7 @@ import { User } from 'src/app/_models/user';
 import { Category } from 'src/app/_models/category';
 import { AccountService } from 'src/app/_services/account.service';
 import { CategoryService } from 'src/app/_services/category.service';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
   selector: 'app-product-categories',
@@ -18,21 +19,11 @@ import { CategoryService } from 'src/app/_services/category.service';
 })
 export class ProductCategoriesComponent implements OnInit {
   @ViewChild('addCategoryForm') addCategoryForm: NgForm;
-  baseUrl = environment.apiUrl;
   addCategoryMode = false;
-  categories: any;
-  categoryRows: Category[] = [];
-  model: any = {};
-  user: User;
-  successMsg: string = "";
-  errorMsg: string = "";
-  toastrTitleAdd: string = "Add a New Product Category";
-  toastrTitleUpdate: string = "Update a Product Category";
-  warningMsg1: string = "Information:  ";
-  warningMsg2: string = "You have made changes.  Any unsaved changes will be lost if you navigate away from this page.";
-
-  productCategories: Category[];
   clonedProductCategory: { [s: string]: Category; } = {};
+  categoryRows: Category[] = [];
+  productCategories: Category[];
+  user: User;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.addCategoryForm.dirty) {
@@ -43,8 +34,8 @@ export class ProductCategoriesComponent implements OnInit {
   constructor(
     private accountService: AccountService, 
     private categoryService: CategoryService,
-    private router: Router,
-    private toastr: ToastrService) 
+    private messageService: MessageService,
+    private router: Router) 
   {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
@@ -90,11 +81,9 @@ export class ProductCategoriesComponent implements OnInit {
   {
     this.categoryService.updateCategory(category.productCategoryId, category).subscribe(() => {
       delete this.clonedProductCategory[category.productCategoryId];
-      this.successMsg = "Category " + category.category + " was successfully updated.";
-      this.toastr.success(this.successMsg, this.toastrTitleUpdate);
+      this.messageService.updateCategorySuccessMsg(category.category);
     }, error => {
-      this.errorMsg = "Update Product Category - " + this.model.category + " - failed for reason " + error.statusCode;
-      this.toastr.error(this.errorMsg, "Update Product Category Error");
+      this.messageService.updateCategoryErrorMsg(error);
     })
   }
 

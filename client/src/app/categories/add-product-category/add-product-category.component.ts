@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Category } from 'src/app/_models/category';
 import { CategoryService } from 'src/app/_services/category.service';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
   selector: 'app-add-product-category',
@@ -9,27 +10,21 @@ import { CategoryService } from 'src/app/_services/category.service';
 })
 export class AddProductCategoryComponent implements OnInit {
   @Output() cancelAddCategory = new EventEmitter();
-  model: any = {};
-  toastrTitle: string = "Add a New Product Category";
-  successMsg: string = "";
-  errorMsg: string = "";
+  categoryRow: Category = new Object() as Category;
 
   constructor(
       private categoryService: CategoryService,
-      private toastr: ToastrService) { }
+      private messageService: MessageService) { }
 
   ngOnInit(): void { }
 
   addCategory()
   {
-    this.categoryService.addCategory(this.model).subscribe(response => {
-      this.successMsg = "New Product Category - " + this.model.category + " - successfully added.";
-      this.toastr.success(this.successMsg,this.toastrTitle);
+    this.categoryService.addCategory(this.categoryRow).subscribe(response => {
+      this.messageService.addCategorySuccessMsg(this.categoryRow.category)
       this.cancel();
     }, error => {
-      console.log(error);
-      this.errorMsg = error.url + " http response code " + error.status;
-      this.toastr.error(error.error, this.errorMsg);
+      this.messageService.addCategoryErrorMsg(error);
     })
   }
 

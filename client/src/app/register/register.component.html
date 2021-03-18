@@ -8,7 +8,7 @@
                 type="text" 
                 class="form-control" 
                 name="username" 
-                [(ngModel)]="model.username" 
+                [(ngModel)]="registerUser.username" 
                 placeholder="Username"
                 required
                 #username="ngModel"
@@ -20,7 +20,7 @@
                 type="text" 
                 class="form-control" 
                 name="email" 
-                [(ngModel)]="model.email" 
+                [(ngModel)]="registerUser.email" 
                 placeholder="E-Mail Address"
                 required
                 #email="ngModel"
@@ -32,7 +32,7 @@
                 type="password" 
                 class="form-control" 
                 name="password" 
-                [(ngModel)]="model.password" 
+                [(ngModel)]="registerUser.password" 
                 placeholder="Password"
                 required
                 #password="ngModel"
@@ -66,7 +66,7 @@
                 class="p-button-success p-button p-button-rounded p-mx-2"
                 icon="pi pi-plus-circle"
                 iconPos="right"
-                [disabled]="!model.username || !model.email || !model.password"
+                [disabled]="!registerUser.username || !registerUser.email || !registerUser.password"
             >
             </button>
             <button

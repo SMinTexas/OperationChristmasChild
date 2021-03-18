@@ -13,7 +13,7 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  addCategory(model: any)
+  addCategory(model: Category)
   {
     return this.http.post<Category>(this.baseUrl + 'categories/add', model);
   }

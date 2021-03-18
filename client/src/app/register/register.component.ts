@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { MessageService } from '../_services/message.service';
+import { Register } from '../_models/register';
 
 @Component({
   selector: 'app-register',
@@ -10,25 +11,21 @@ import { AccountService } from '../_services/account.service';
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   model: any = {};
-  errorMsg: string = '';
-  successMsg: string = '';
-  toastrTitle: string = 'Register a New User';
+  registerUser: Register = new Object() as Register;
 
   constructor(
     private accountService: AccountService, 
-    private toastr: ToastrService) { }
+    private messageService: MessageService) { }
 
   ngOnInit(): void { }
 
   register()
   {
-    this.accountService.register(this.model).subscribe(response => {
-      this.successMsg = "New user - " + this.model.username + " - successfully registered.";
-      this.toastr.success(this.successMsg,this.toastrTitle);
+    this.accountService.register(this.registerUser).subscribe(response => {
+      this.messageService.registerSuccessMsg(this.registerUser.username);
       this.cancel();
     }, error => {
-      this.errorMsg = error.url + ' http status code: ' + error.status;
-      this.toastr.error(error.error, this.errorMsg);
+      this.messageService.registerErrorMsg(error);
     })
   }
 
