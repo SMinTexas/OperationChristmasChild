@@ -43,9 +43,9 @@ export class DashboardComponent implements OnInit {
         }
   
         return {
-          columns: 4,
+          columns: 5,
           miniCard: { cols: 1, rows: 1 },
-          chart: { cols: 4, rows: 2 }
+          chart: { cols: 5, rows: 2 }
         };
       })
     );
