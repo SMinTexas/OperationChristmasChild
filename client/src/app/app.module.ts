@@ -20,7 +20,6 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { BadRequestComponent } from './errors/bad-request/bad-request.component';
 import { UnauthorizedComponent } from './errors/unauthorized/unauthorized.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductCategoriesComponent } from './categories/product-categories/product-categories.component';
 import { AddProductCategoryComponent } from './categories/add-product-category/add-product-category.component';
 import { EditProductCategoryComponent } from './categories/edit-product-category/edit-product-category.component';
@@ -30,6 +29,15 @@ import { RippleModule } from 'primeng/ripple';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ChartsModule } from 'ng2-charts';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
+import { CardComponent } from './card/card.component';
+import { MiniCardComponent } from './mini-card/mini-card.component';
 
 @NgModule({
   declarations: [
@@ -45,10 +53,12 @@ import { ChartsModule } from 'ng2-charts';
     BadRequestComponent,
     UnauthorizedComponent,
     ServerErrorComponent,
-    DashboardComponent,
     ProductCategoriesComponent,
     AddProductCategoryComponent,
-    EditProductCategoryComponent
+    EditProductCategoryComponent,
+    DashboardComponent,
+    CardComponent,
+    MiniCardComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +72,13 @@ import { ChartsModule } from 'ng2-charts';
     RippleModule,
     InputTextModule,
     PasswordModule,
-    ChartsModule
+    ChartsModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
