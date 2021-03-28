@@ -8,34 +8,12 @@
     -->
     <!-- <div class="collapse navbar-collapse" id="navbarCollapse"> -->
 
-    <!-- <ul class="navbar-nav me-auto">
-      <ng-container *ngIf="accountService.currentUser$ | async">
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/inventory-list' routerLinkActive='active'>Inventory List</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/inventory-add' routerLinkActive='active'>Add Inventory</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/inventory-edit/:id' routerLinkActive='active'>Edit an Inventory Item</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/maintenance' routerLinkActive='active'>Your Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/maintenance' routerLinkActive='active'>Maintenance</a>
-        </li>
-      </ng-container>
-    </ul> -->
-
     <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
       <a class="dropdown-toggle text-light" style="font-weight: bold;" dropdownToggle>Welcome {{user.username | titlecase}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item" routerLink="/dashboard">Your Dashboard</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" routerLink='/inventories'>Inventory</a>
-        <!-- <a class="dropdown-item" routerLink='/inventory/add'>Add Inventory</a> -->
-        <!-- <a class="dropdown-item" routerLink='/inventory/edit/:id'>Edit Inventory Item</a> -->
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" routerLink='/categories'>Product Categories</a>
         <div class="dropdown-divider"></div>

@@ -12,6 +12,8 @@ import { MessageService } from '../_services/message.service';
 export class NavComponent implements OnInit {
   model: any = {};
   errorMsg: string = '';
+  username: string = '';
+  password: string = '';
 
   constructor(
     public accountService: AccountService,
@@ -31,8 +33,15 @@ export class NavComponent implements OnInit {
 
   logout() 
   {
+    this.clearCredentials();
     this.accountService.logout();
     this.router.navigateByUrl('/');
+  }
+
+  clearCredentials()
+  {
+    this.model.username = null;
+    this.model.password = null;
   }
 
 }
