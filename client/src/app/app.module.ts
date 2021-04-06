@@ -38,6 +38,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CardComponent } from './card/card.component';
 import { MiniCardComponent } from './mini-card/mini-card.component';
+import { ProductTotalsComponent } from './chart/product-totals/product-totals.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { MiniCardComponent } from './mini-card/mini-card.component';
     EditProductCategoryComponent,
     DashboardComponent,
     CardComponent,
-    MiniCardComponent
+    MiniCardComponent,
+    ProductTotalsComponent
   ],
   imports: [
     BrowserModule,

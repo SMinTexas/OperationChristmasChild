@@ -6,6 +6,6 @@ namespace API.Interfaces
 {
     public interface IDashboardRepository
     {
-        Task<IEnumerable<DashboardDto>> GetDashboardData(int userId);      
+        Task<IEnumerable<DashboardDto>> GetDashboardData(int userId); 
     }
 }

@@ -20,22 +20,4 @@ export class DashboardService {
     return this.http.get<Dashboard[]>(apiURL);
   }
 
-  getDashboardData2(appUserId: number) {
-    let promise = new Promise((resolve, reject) => {
-      let apiURL = `${this.baseUrl + 'dashboard/' + appUserId}`;
-      this.http.get(apiURL)
-          .toPromise()
-          .then(
-              res => { // Success
-
-                console.log('this is the data:', res as Dashboard[]);
-                resolve(res as Dashboard[]);
-              },
-              msg => { // Error
-                reject(msg);
-              }
-          );
-    });
-    return promise;
-  }
 }

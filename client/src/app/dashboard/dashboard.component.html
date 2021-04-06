@@ -2,17 +2,20 @@
     <h1 class="mat-h1">{{user.username | titlecase}}'s Dashboard</h1>
   
     <mat-grid-list cols="{{(cardLayout | async)?.columns }}" rowHeight="200px">
-  
-      <!--Charts-->
-      <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
-        <app-card [title]="'All Inventory Counts By Category'"> 
-          <!-- <annual-sales-chart></annual-sales-chart> -->
-        </app-card>
-      </mat-grid-tile>
+        <!--Charts-->
+        <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
+          <app-card [title]="'Products By Category - ' + selectedGender + ' | ' + selectedAgeRange"> 
+            <app-product-totals 
+              [data]="(dashboardData | async)" 
+              [gender]="selectedGender"
+              [ageRange]="selectedAgeRange">
+            </app-product-totals>
+          </app-card>
+        </mat-grid-tile>
 
       <!--Mini Cards-->
       <mat-grid-tile *ngFor="let item of (dashboardData | async)" [colspan]="( cardLayout | async )?.miniCard.cols"
-        [rowspan]="( cardLayout | async )?.miniCard.rows">
+        [rowspan]="( cardLayout | async )?.miniCard.rows" (click)="select(item.ageRange, item.gender)">
         <app-mini-card 
           [gender]="item.gender"
           [ageRange]="item.ageRange"
@@ -21,7 +24,6 @@
         </app-mini-card>
       </mat-grid-tile>
   
-
-  
     </mat-grid-list>
+    
   </div>

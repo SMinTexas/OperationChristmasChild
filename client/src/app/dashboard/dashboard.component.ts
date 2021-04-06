@@ -8,6 +8,8 @@ import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 import { Dashboard } from '../_models/dashboard';
 import { DashboardService } from '../_services/dashboard.service';
+import { CategoryCount } from '../_models/categoryCount';
+import { ProductTotalsComponent } from '../chart/product-totals/product-totals.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +19,8 @@ import { DashboardService } from '../_services/dashboard.service';
 export class DashboardComponent implements OnInit {
   user: User;
   dashboardData: Observable<Dashboard[]>;
+  selectedAgeRange: string = "All";
+  selectedGender: string = "All";
 
   constructor(
     private breakpointObserver: BreakpointObserver, 
@@ -36,17 +40,26 @@ export class DashboardComponent implements OnInit {
       map(({ matches }) => {
         if (matches) {
           return {
-            columns: 1,
+            columns: 1, 
+            mc: { cols: 1, rows: 1},
             miniCard: { cols: 1, rows: 1 },
             chart: { cols: 1, rows: 2 }
           };
         }
   
         return {
-          columns: 5,
+          columns: 3,
+          mc: { cols: 1, rows: 1},
           miniCard: { cols: 1, rows: 1 },
-          chart: { cols: 5, rows: 2 }
+          chart: { cols: 3, rows: 2 }
         };
       })
     );
+
+    select(ageRange: string, gender: string)
+    {
+      console.log('you selected ', ageRange, " ", gender);
+      this.selectedAgeRange = ageRange;
+      this.selectedGender = gender;
+    }
 }
