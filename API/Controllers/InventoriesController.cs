@@ -25,14 +25,6 @@ namespace API.Controllers
             return Ok(inventoryToReturn);
         }
 
-        [HttpGet("{userId}/{itemId}")]
-        public async Task<ActionResult<InventoryDto>> GetUserInventoryItem(int userId, int itemId)
-        {
-            var inventory = await _inventoryRepository.GetItemAsync(userId, itemId);
-            return _mapper.Map<InventoryDto>(inventory);
-            //this is not functioning correctly
-        }
-
         [HttpPost("add")]
         //[Route("api/inventories")]
         public async Task<ActionResult<InventoryDto>> Add(InventoryDto inventoryDto)

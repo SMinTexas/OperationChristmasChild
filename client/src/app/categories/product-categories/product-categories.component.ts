@@ -1,10 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 
 import { User } from 'src/app/_models/user';
 import { Category } from 'src/app/_models/category';

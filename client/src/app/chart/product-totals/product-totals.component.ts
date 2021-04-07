@@ -25,9 +25,12 @@ export class ProductTotalsComponent implements OnInit {
   public pieChartLegend = true;
   public pieChartPlugins = [];
   public pieChartData: SingleDataSet = [];
+  public pieChartColors: Array<any> = [
+    {backgroundColor: ['blue','red','yellow','purple','orange','green','white','black'],
+    borderColor: ['red','blue','purple','yellow','green','orange','black','white']
+    }];
 
-  constructor() 
-  {}
+  constructor() { }
 
   ngOnInit(): void { }
 

@@ -8,8 +8,6 @@ import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 import { Dashboard } from '../_models/dashboard';
 import { DashboardService } from '../_services/dashboard.service';
-import { CategoryCount } from '../_models/categoryCount';
-import { ProductTotalsComponent } from '../chart/product-totals/product-totals.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -56,9 +54,8 @@ export class DashboardComponent implements OnInit {
       })
     );
 
-    select(ageRange: string, gender: string)
+    onClick(ageRange: string, gender: string)
     {
-      console.log('you selected ', ageRange, " ", gender);
       this.selectedAgeRange = ageRange;
       this.selectedGender = gender;
     }

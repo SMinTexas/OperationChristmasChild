@@ -15,7 +15,7 @@
 
       <!--Mini Cards-->
       <mat-grid-tile *ngFor="let item of (dashboardData | async)" [colspan]="( cardLayout | async )?.miniCard.cols"
-        [rowspan]="( cardLayout | async )?.miniCard.rows" (click)="select(item.ageRange, item.gender)">
+        [rowspan]="( cardLayout | async )?.miniCard.rows" (click)="onClick(item.ageRange, item.gender)">
         <app-mini-card 
           [gender]="item.gender"
           [ageRange]="item.ageRange"

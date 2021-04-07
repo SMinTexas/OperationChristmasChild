@@ -34,11 +34,5 @@ namespace API.Controllers
             return _mapper.Map<UserInventoryDto>(user);
         }
 
-        // [HttpGet("{id}")]
-        // public async Task<ActionResult<UserInventoryDto>> GetUser(int id)
-        // {
-        //     var user = await _userRepository.GetUserByIdAsync(id);
-        //     return _mapper.Map<UserInventoryDto>(user);
-        // }
     }
 }

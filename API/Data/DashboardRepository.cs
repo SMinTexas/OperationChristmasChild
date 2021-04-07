@@ -2,9 +2,7 @@ using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -150,11 +148,6 @@ namespace API.Data
 
         private List<CategoryCountDto> GetCategorySummary(List<Inventory> items, List<ProductCategory> cats)
         {
-                // var Categories = from item in items
-                //                  group item by item.ProductCategoryId into newGroup
-                //                  orderby newGroup.Key
-                //                  select new CategoryCountDto{ Category = newGroup.Key.ToString(), TotalCount = Sum()}
-            // var Categories = items?.GroupBy(i => i.ProductCategoryId);
             var categorySummary = from i in items
                                   join c in cats on i.ProductCategoryId equals c.ProductCategoryId
                                   group i by new { i.ProductCategoryId, c.Category } into g

@@ -69,7 +69,7 @@
                     </tr>
                 </ng-template> -->
 
-                <!-- If I can get the expansion to work, the blow will be pTemplate="rowexpansion" -->
+                <!-- If I can get the expansion to work, the below will be pTemplate="rowexpansion" -->
                 <ng-template pTemplate="body" let-productInventory let-editing="editing" let-ri="rowIndex">
                     <tr [pEditableRow]="productInventory">
                      
@@ -183,18 +183,6 @@
                     </tr>
                 </ng-template>
 
-                <!-- <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td colspan="6">There are no items to display for this product category.</td>
-                    </tr>
-                </ng-template> -->
-
-                <!-- <ng-template pTemplate="footer">
-                    <tr>
-                        <td colspan="15">You have a lot of stuff</td>
-                    </tr>
-                </ng-template> -->
-
             </p-table>
         </div>
     </div>
@@ -207,15 +195,3 @@
         </div>
     </div>
 </div>
-
-                        <!-- <td class="hide">{{productInventory.category}}</td> -->
-
-                        <!-- <td>{{productInventory.item}}</td>
-                        <td>{{productInventory.itemDescription}}</td>
-                        <td>{{productInventory.ageRange}}</td>
-                        <td>{{productInventory.gender}}</td>
-                        <td>{{productInventory.itemCount}}</td>
-                        <td>{{productInventory.itemPrice | currency: 'USD'}}</td>
-                        <td>{{productInventory.bestPrice | currency: 'USD'}}</td>
-                        <td>{{productInventory.lastPurchasedDate | date}}</td>
-                        <td>{{productInventory.notes}}</td> -->

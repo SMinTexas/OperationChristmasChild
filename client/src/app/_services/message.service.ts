@@ -67,7 +67,6 @@ export class MessageService {
 
   loginErrorMsg(error: any)
   {
-    console.log('what is in the error object? ', error.url, '--', error.statusCode, '--', error.status);
     this.toastr.error(error.url + ": RETURNED HTTP response code " + error.status, this.loginUser);
   }
 }

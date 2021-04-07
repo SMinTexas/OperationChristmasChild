@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { take } from 'rxjs/operators';
 
 import { Dashboard } from '../_models/dashboard';
 import { Observable } from 'rxjs';
